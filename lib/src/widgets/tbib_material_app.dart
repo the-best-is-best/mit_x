@@ -26,12 +26,12 @@ class MitXMaterialApp extends StatefulWidget {
       localeListResolutionCallback;
   final Locale? Function(Locale?, Iterable<Locale>)? localeResolutionCallback;
   final Iterable<Locale>? supportedLocales;
-  final bool debugShowMaterialGrid = false;
-  final bool showPerformanceOverlay = false;
-  final bool checkerboardRasterCacheImages = false;
-  final bool checkerboardOffscreenLayers = false;
-  final bool showSemanticsDebugger = false;
-  final bool debugShowCheckedModeBanner = true;
+  final bool debugShowMaterialGrid;
+  final bool showPerformanceOverlay;
+  final bool checkerboardRasterCacheImages;
+  final bool checkerboardOffscreenLayers;
+  final bool showSemanticsDebugger;
+  final bool debugShowCheckedModeBanner;
   final Map<ShortcutActivator, Intent>? shortcuts;
   final Map<Type, Action<Intent>>? actions;
   final String? restorationScopeId;
@@ -73,7 +73,13 @@ class MitXMaterialApp extends StatefulWidget {
       this.translationsKeys,
       this.textDirection,
       this.builder,
-      this.fallbackLocale})
+      this.fallbackLocale,
+      this.debugShowMaterialGrid = false,
+      this.showPerformanceOverlay = false,
+      this.checkerboardRasterCacheImages = false,
+      this.checkerboardOffscreenLayers = false,
+      this.showSemanticsDebugger = false,
+      this.debugShowCheckedModeBanner = false})
       : super(key: key);
 
   @override

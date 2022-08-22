@@ -1,4 +1,4 @@
-# MitX_X
+# MitX
 ## Route management
 
 If you are going to use routes/snackbars/dialogs/bottomsheets without context, MitXX is excellent for you too, just see it:

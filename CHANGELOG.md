@@ -1,3 +1,11 @@
-## 0.0.1
+## 0.0.3-beta
 
-* TODO: Describe initial release.
+*  MitXMaterialApp Parameter issue solved .
+
+## 0.0.2-beta
+
+* Solve description.
+
+## 0.0.1-beta
+
+* initial release.

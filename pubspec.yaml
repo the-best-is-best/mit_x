@@ -1,7 +1,7 @@
 name: mit_x
-description: Open screens/snackbars/dialogs without context, manage states and inject dependencies easily with MitX.
-version: 0.0.1-beta
-homepage: null
+description: Open screens/snackbars/dialogs without context , with MitX.
+version: 0.0.3-beta
+homepage: https://github.com/the-best-is-best/mit_x
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
