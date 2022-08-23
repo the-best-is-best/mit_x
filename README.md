@@ -1,4 +1,88 @@
 # MitX
+
+## Localization
+* first create class implements Translations
+
+```dart
+ class LangController implements Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+        'en': {
+            'test':'test',
+        }
+        'ar': {
+            'test':'تست',
+        }
+      };
+}
+```
+* second call it in MitXMaterialApp
+
+```dart
+ MitXMaterialApp(
+    translations: LangController(),
+    locale: Locale('en', 'US'), // translations will be displayed in that locale
+    fallbackLocale: Locale('en', 'UK'), // specify the fallback locale in case an invalid locale is selected.
+ );
+```
+
+## Using translations
+* Just append .tr to the specified key and it will be translated, using the current value of MitX.locale and MitX.fallbackLocale.
+
+```dart
+    Text('test'.tr)
+```
+* Using translation with singular and plural
+
+```dart
+   var products = [];
+   Text('singularKey'.trPlural('pluralKey', products.length, Args));
+```
+
+* Using translation with parameters
+
+```dart
+   import 'package:get/get.dart';
+
+
+Map<String, Map<String, String>> get keys => {
+    'en_US': {
+        'logged_in': 'logged in as @name with email @email',
+    },
+    'es_ES': {
+       'logged_in': 'iniciado sesión como @name con e-mail @email',
+    }
+};
+
+Text('logged_in'.trParams({
+  'name': 'Jhon',
+  'email': 'jhon@example.com'
+  }));
+```
+
+# Locales
+* Pass parameters to MitXMaterialApp to define the locale and translations.
+
+## Change locale
+
+* Call MitX.updateLocale(locale) to update the locale. Translations then automatically use the new locale.
+
+``` dart
+    var locale = Locale('en', 'US');
+    MitX.updateLocale(locale);
+```
+
+## System locale
+
+* To read the system locale, you could use MitX.deviceLocale.
+
+```dart
+   return MitXMaterialApp(
+    locale: MitX.deviceLocale,
+);
+```
+
+
 ## Route management
 
 If you are going to use routes/snackbars/dialogs/bottomsheets without context, MitXX is excellent for you too, just see it:
