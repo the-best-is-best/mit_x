@@ -82,7 +82,7 @@ class MitXBottomSheetRoute<T> extends PopupRoute<T> {
       child: Padding(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: _GetModalBottomSheet<T>(
+        child: _MitXModalBottomSheet<T>(
           route: this,
           backgroundColor: backgroundColor ??
               sheetTheme.modalBackgroundColor ??
@@ -101,8 +101,8 @@ class MitXBottomSheetRoute<T> extends PopupRoute<T> {
   }
 }
 
-class _GetModalBottomSheet<T> extends StatefulWidget {
-  const _GetModalBottomSheet({
+class _MitXModalBottomSheet<T> extends StatefulWidget {
+  const _MitXModalBottomSheet({
     Key? key,
     this.route,
     this.backgroundColor,
@@ -123,10 +123,11 @@ class _GetModalBottomSheet<T> extends StatefulWidget {
   final bool enableDrag;
 
   @override
-  _GetModalBottomSheetState<T> createState() => _GetModalBottomSheetState<T>();
+  _MitXModalBottomSheetState<T> createState() =>
+      _MitXModalBottomSheetState<T>();
 }
 
-class _GetModalBottomSheetState<T> extends State<_GetModalBottomSheet<T>> {
+class _MitXModalBottomSheetState<T> extends State<_MitXModalBottomSheet<T>> {
   String _getRouteLabel(MaterialLocalizations localizations) {
     if ((Theme.of(context).platform == TargetPlatform.android) ||
         (Theme.of(context).platform == TargetPlatform.fuchsia)) {
@@ -159,7 +160,7 @@ class _GetModalBottomSheetState<T> extends State<_GetModalBottomSheet<T>> {
           explicitChildNodes: true,
           child: ClipRect(
             child: CustomSingleChildLayout(
-                delegate: _GetModalBottomSheetLayout(
+                delegate: _MitXModalBottomSheetLayout(
                     animationValue, widget.isScrollControlled),
                 child: widget.isPersistent == false
                     ? BottomSheet(
@@ -200,8 +201,8 @@ class _GetModalBottomSheetState<T> extends State<_GetModalBottomSheet<T>> {
   }
 }
 
-class _GetPerModalBottomSheet<T> extends StatefulWidget {
-  const _GetPerModalBottomSheet({
+class _MitXPerModalBottomSheet<T> extends StatefulWidget {
+  const _MitXPerModalBottomSheet({
     Key? key,
     this.route,
     this.isPersistent,
@@ -223,13 +224,13 @@ class _GetPerModalBottomSheet<T> extends StatefulWidget {
 
   @override
   // ignore: lines_longer_than_80_chars
-  _GetPerModalBottomSheetState<T> createState() =>
-      _GetPerModalBottomSheetState<T>();
+  _MitXPerModalBottomSheetState<T> createState() =>
+      _MitXPerModalBottomSheetState<T>();
 }
 
 // ignore: lines_longer_than_80_chars
-class _GetPerModalBottomSheetState<T>
-    extends State<_GetPerModalBottomSheet<T>> {
+class _MitXPerModalBottomSheetState<T>
+    extends State<_MitXPerModalBottomSheet<T>> {
   String _getRouteLabel(MaterialLocalizations localizations) {
     if ((Theme.of(context).platform == TargetPlatform.android) ||
         (Theme.of(context).platform == TargetPlatform.fuchsia)) {
@@ -262,7 +263,7 @@ class _GetPerModalBottomSheetState<T>
           explicitChildNodes: true,
           child: ClipRect(
             child: CustomSingleChildLayout(
-                delegate: _GetModalBottomSheetLayout(
+                delegate: _MitXModalBottomSheetLayout(
                     animationValue, widget.isScrollControlled),
                 child: widget.isPersistent == false
                     ? BottomSheet(
@@ -303,8 +304,8 @@ class _GetPerModalBottomSheetState<T>
   }
 }
 
-class _GetModalBottomSheetLayout extends SingleChildLayoutDelegate {
-  _GetModalBottomSheetLayout(this.progress, this.isScrollControlled);
+class _MitXModalBottomSheetLayout extends SingleChildLayoutDelegate {
+  _MitXModalBottomSheetLayout(this.progress, this.isScrollControlled);
 
   final double progress;
   final bool isScrollControlled;
@@ -327,7 +328,7 @@ class _GetModalBottomSheetLayout extends SingleChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(_GetModalBottomSheetLayout oldDelegate) {
+  bool shouldRelayout(_MitXModalBottomSheetLayout oldDelegate) {
     return progress != oldDelegate.progress;
   }
 }

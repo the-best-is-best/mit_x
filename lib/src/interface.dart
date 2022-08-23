@@ -5,9 +5,9 @@ abstract class MitXInterface {
   RouteInformationParser? routeInformationParser;
 }
 
-class _GetImpl extends MitXInterface {
+class _MitXImpl extends MitXInterface {
   void log(String string) {}
 }
 
 // ignore: non_constant_identifier_names
-final MitX = _GetImpl();
+final MitX = _MitXImpl();

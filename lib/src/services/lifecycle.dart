@@ -10,23 +10,23 @@ class InternalFinalCallback<T> {
   T call() => _callback!.call();
 }
 
-/// The [GetLifeCycle]
+/// The [MitXLifeCycle]
 ///
 /// ```dart
-/// class SomeController with GetLifeCycle {
+/// class SomeController with MitXLifeCycle {
 ///   SomeController() {
 ///     configureLifeCycle();
 ///   }
 /// }
 /// ```
-mixin GetLifeCycleBase {
+mixin MitXLifeCycleBase {
   /// Called at the exact moment the widget is allocated in memory.
   /// It uses an internal "callable" type, to avoid any @overrides in subclases.
   /// This method should be internal and is required to define the
   /// lifetime cycle of the subclass.
   final onStart = InternalFinalCallback<void>();
 
-  // /// The `configureLifeCycle` works as a constructor for the [GetLifeCycle]
+  // /// The `configureLifeCycle` works as a constructor for the [MitXLifeCycle]
   // ///
   // /// This method must be invoked in the constructor of the implementation
   // void configureLifeCycle() {
@@ -87,13 +87,13 @@ mixin GetLifeCycleBase {
     if (_initialized) {
       throw """You can only call configureLifeCycle once. 
 The proper place to insert it is in your class's constructor 
-that inherits GetLifeCycle.""";
+that inherits MitXLifeCycle.""";
     }
   }
 }
 
-abstract class GetLifeCycle with GetLifeCycleBase {
-  GetLifeCycle() {
+abstract class MitXLifeCycle with MitXLifeCycleBase {
+  MitXLifeCycle() {
     $configureLifeCycle();
   }
 }
