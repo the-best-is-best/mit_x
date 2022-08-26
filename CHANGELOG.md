@@ -1,4 +1,4 @@
-## 0.0.3-beta
+## 0.0.3
 
 *  MitXMaterialApp Parameter issue solved .
 * add more extensions

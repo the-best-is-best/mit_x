@@ -85,6 +85,20 @@ Text('logged_in'.trParams({
 
 ## Route management
 
+to navigate or generate navigation 
+
+* in flutter 
+
+```dart
+    MaterialPageRoute(builder: (context) => const HomeView());
+```
+
+* but now you can use it with the same parameters
+
+```dart
+     mitXMaterialPageRoute(page: const FiveDaysForecastView());
+```
+
 If you are going to use routes/snackbars/dialogs/bottomsheets without context, MitXX is excellent for you too, just see it:
 
 
