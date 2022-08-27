@@ -1181,3 +1181,14 @@ extension OverlayExt on MitXInterface {
     Keys.keys = {};
   }
 }
+
+extension ExtensionDrawer on MitXInterface {
+  GlobalKey<ScaffoldState> get scaffoldKey => Keys.scaffoldKey;
+  void openDrawer() {
+    Keys.scaffoldKey.currentContext?.openDrawer();
+  }
+
+  void closeDrawer() {
+    Keys.scaffoldKey.currentContext?.closeDrawer();
+  }
+}

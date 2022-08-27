@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../keys/keys.dart';
 import '../platform/platform.dart';
 
 extension ContextExtensionss on BuildContext {
@@ -137,5 +138,21 @@ extension ContextExtensionss on BuildContext {
     } else {
       return mobile!;
     }
+  }
+
+  void openDrawer() {
+    Keys.scaffoldKey.currentState?.openDrawer();
+  }
+
+  void closeDrawer() {
+    Keys.scaffoldKey.currentState?.closeDrawer();
+  }
+
+  void openEndDrawer() {
+    Keys.scaffoldKey.currentState?.openEndDrawer();
+  }
+
+  void closeEndDrawer() {
+    Keys.scaffoldKey.currentState?.closeEndDrawer();
   }
 }
