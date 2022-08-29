@@ -1,3 +1,8 @@
+## 0.0.6
+
+* Solve Score.
+
+
 ## 0.0.5
 
 * Solve url Utils readme.

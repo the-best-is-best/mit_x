@@ -1,6 +1,6 @@
 name: mit_x
 description: Open screens/snackbars/dialogs/drawer without context , with MitX.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/the-best-is-best/mit_x
 
 environment:
