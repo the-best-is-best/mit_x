@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mit_x/mit_x.dart';
-import 'package:mit_x/src/widgets/snackbar/snackbar_controller.dart';
 
 typedef OnTap = void Function(MitXSnackBar snack);
 

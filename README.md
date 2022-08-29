@@ -1,7 +1,7 @@
 # MitX
 
 ## Utils
-* see this utils in this link <a href="readme/utils/utils.md"> Click Here </a>  
+* see this utils in this link <a href="https://github.com/the-best-is-best/mit_x/blob/master/readme/utils/utils.md"> Click Here </a>  
 
 ## now in v 0.0.4
 * you can open drawer or end drawer example

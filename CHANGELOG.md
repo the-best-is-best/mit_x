@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Solve url Utils readme.
+
 ## 0.0.4
 
 * Add Utils.
