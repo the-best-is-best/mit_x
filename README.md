@@ -3,6 +3,22 @@
 ## Utils
 * see this utils in this link <a href="readme/utils/utils.md"> Click Here </a>  
 
+## now in v 0.0.4
+* you can open drawer or end drawer example
+
+```dart
+  Scaffold(
+    key:MitX.scaffoldKey,
+    drawer: Drawer(),
+    body: IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+                MitX.openDrawer();
+        },
+    ),
+  )
+```
+
 ## Localization
 * first create class implements Translations
 

@@ -1,6 +1,6 @@
 name: mit_x
 description: Open screens/snackbars/dialogs without context , with MitX.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/the-best-is-best/mit_x
 
 environment:
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
- 
 
 dev_dependencies:
   flutter_lints: ^2.0.0
