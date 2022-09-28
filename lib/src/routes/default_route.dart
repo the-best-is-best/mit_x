@@ -78,8 +78,6 @@ class GetPageRoute<T> extends PageRoute<T>
   @override
   final bool maintainState;
 
-  // final List<MitXMiddleware>? middlewares;
-
   Widget? _child;
 
   Widget _getChild() {
