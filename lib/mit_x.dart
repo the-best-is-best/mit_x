@@ -1,7 +1,9 @@
 library mit_x;
 
+export 'src/routes/mit_route.dart';
 export 'src/interface.dart';
-
+export 'src/routes/observer/route_observer.dart';
+export 'src/static/static_data.dart';
 export 'src/routes/routes_report.dart';
 export 'src/routes/routes_manager.dart';
 

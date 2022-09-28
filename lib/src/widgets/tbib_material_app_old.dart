@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
-import 'package:mit_x/src/routes/route_redirect.dart';
 import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 class MitXMaterialApp extends StatefulWidget {
@@ -20,10 +19,10 @@ class MitXMaterialApp extends StatefulWidget {
   final GenerateAppTitle? onGenerateTitle;
   final ThemeData? theme;
   final ThemeData? darkTheme;
-  final ThemeMode themeMode;
+  final ThemeMode? themeMode;
   final CustomTransition? customTransition;
   final Color? color;
-  final Map<String, Map<String, String>>? translationsKey;
+  final Map<String, Map<String, String>>? translationsStaticData;
   final Translations? translations;
   final TextDirection? textDirection;
   final Locale? locale;
@@ -31,7 +30,7 @@ class MitXMaterialApp extends StatefulWidget {
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
   final LocaleListResolutionCallback? localeListResolutionCallback;
   final LocaleResolutionCallback? localeResolutionCallback;
-  final Iterable<Locale> supportedLocales;
+  final Iterable<Locale>? supportedLocales;
   final bool showPerformanceOverlay;
   final bool checkerboardRasterCacheImages;
   final bool checkerboardOffscreenLayers;
@@ -57,6 +56,9 @@ class MitXMaterialApp extends StatefulWidget {
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
   final bool useInheritedMediaQuery;
+
+  final Map<String, Map<String, String>>? translationsKeys;
+
   const MitXMaterialApp({
     Key? key,
     //   this.navigatorKey,
@@ -94,7 +96,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.shortcuts,
     this.scrollBehavior,
     this.customTransition,
-    this.translationsKey,
+    this.translationsStaticData,
     this.translations,
     this.routingCallback,
     this.defaultTransition,
@@ -109,6 +111,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.highContrastDarkTheme,
     this.actions,
     this.navigatorKey,
+    this.translationsKeys,
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
@@ -147,7 +150,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.scrollBehavior,
     this.actions,
     this.customTransition,
-    this.translationsKey,
+    this.translationsStaticData,
     this.translations,
     this.textDirection,
     this.fallbackLocale,
@@ -162,6 +165,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.navigatorObservers,
     this.unknownRoute,
     this.navigatorKey,
+    this.translationsKeys,
   })  : routerDelegate = routerDelegate ??= MitX.createDelegate(
           notFoundRoute: unknownRoute,
         ),
@@ -183,127 +187,90 @@ class MitXMaterialApp extends StatefulWidget {
   }
 
   @override
-  State<MitXMaterialApp> createState() => _MitXMaterialAppState();
+  State<MitXMaterialApp> createState() => _MitXMartialAppState();
 }
 
-class _MitXMaterialAppState extends State<MitXMaterialApp> {
+class _MitXMartialAppState extends State<MitXMaterialApp> {
   @override
   void initState() {
     StaticData.navigateKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.locale != null) MitX.locale = widget.locale;
 
-    if (widget.locale != null) MitX.locale = widget.locale;
+      if (widget.fallbackLocale != null) {
+        MitX.fallbackLocale = widget.fallbackLocale;
+      }
 
-    if (widget.fallbackLocale != null) {
-      MitX.fallbackLocale = widget.fallbackLocale;
-    }
+      if (widget.translations != null) {
+        MitX.addTranslations(widget.translations!.keys);
+      } else if (widget.translationsStaticData != null) {
+        MitX.addTranslations(widget.translationsStaticData!);
+      }
 
-    if (widget.translations != null) {
-      MitX.addTranslations(widget.translations!.keys);
-    } else if (widget.translationsKey != null) {
-      MitX.addTranslations(widget.translationsKey!);
-    }
+      MitX.customTransition = widget.customTransition;
 
-    MitX.customTransition = widget.customTransition;
+      if (widget.mitXPages != null) {
+        MitX.addPages(widget.mitXPages!);
+      }
 
-    if (widget.mitXPages != null) {
-      MitX.addPages(widget.mitXPages!);
-    }
-
-    MitX.config(
-      enableLog: widget.enableLog,
-      defaultTransition: widget.defaultTransition ?? MitX.defaultTransition,
-      defaultOpaqueRoute: widget.opaqueRoute ?? MitX.isOpaqueRouteDefault,
-      defaultPopGesture: widget.popGesture ?? MitX.isPopGestureEnable,
-      defaultDurationTransition:
-          widget.transitionDuration ?? MitX.defaultTransitionDuration,
-    );
-
+      MitX.config(
+        enableLog: widget.enableLog,
+        defaultTransition: widget.defaultTransition ?? MitX.defaultTransition,
+        defaultOpaqueRoute: widget.opaqueRoute ?? MitX.isOpaqueRouteDefault,
+        defaultPopGesture: widget.popGesture ?? MitX.isPopGestureEnable,
+        defaultDurationTransition:
+            widget.transitionDuration ?? MitX.defaultTransitionDuration,
+      );
+    });
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) => widget.routerDelegate != null
-      ? MaterialApp.router(
-          routerDelegate: widget.routerDelegate!,
-          routeInformationParser: widget.routeInformationParser!,
-          backButtonDispatcher: widget.backButtonDispatcher,
-          routeInformationProvider: widget.routeInformationProvider,
-          key: MitX.key,
-          builder: defaultBuilder,
-          title: widget.title,
-          onGenerateTitle: widget.onGenerateTitle,
-          color: widget.color,
-          theme: StaticData.theme ?? widget.theme ?? ThemeData.fallback(),
-          darkTheme: StaticData.darkTheme ??
-              widget.darkTheme ??
-              widget.theme ??
-              ThemeData.fallback(),
-          themeMode: widget.themeMode,
-          locale: MitX.locale ?? widget.locale,
-          scaffoldMessengerKey:
-              widget.scaffoldMessengerKey ?? StaticData.scaffoldMessengerKey,
-          localizationsDelegates: widget.localizationsDelegates,
-          localeListResolutionCallback: widget.localeListResolutionCallback,
-          localeResolutionCallback: widget.localeResolutionCallback,
-          supportedLocales: widget.supportedLocales,
-          debugShowMaterialGrid: widget.debugShowMaterialGrid,
-          showPerformanceOverlay: widget.showPerformanceOverlay,
-          checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
-          checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-          showSemanticsDebugger: widget.showSemanticsDebugger,
-          debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-          shortcuts: widget.shortcuts,
-          scrollBehavior: widget.scrollBehavior,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
-        )
-      : MaterialApp(
-          navigatorKey: MitX.key,
-          scaffoldMessengerKey:
-              widget.scaffoldMessengerKey ?? StaticData.scaffoldMessengerKey,
-          home: widget.home,
-          routes: widget.routes ?? const <String, WidgetBuilder>{},
-          initialRoute: widget.initialRoute,
-          onGenerateRoute:
-              (widget.mitXPages != null ? generator : widget.onGenerateRoute),
-          onGenerateInitialRoutes:
-              (widget.mitXPages == null || widget.home != null)
-                  ? widget.onGenerateInitialRoutes
-                  : initialRoutesGenerate,
-          onUnknownRoute: widget.onUnknownRoute,
-          navigatorObservers: (widget.navigatorObservers == null
-              ? <NavigatorObserver>[
-                  GetObserver(widget.routingCallback, MitX.routing)
-                ]
-              : <NavigatorObserver>[
-                  GetObserver(widget.routingCallback, MitX.routing)
-                ]
-            ..addAll(widget.navigatorObservers!)),
-          builder: defaultBuilder,
-          title: widget.title,
-          onGenerateTitle: widget.onGenerateTitle,
-          color: widget.color,
-          theme: StaticData.theme ?? widget.theme ?? ThemeData.fallback(),
-          darkTheme: StaticData.darkTheme ??
-              widget.darkTheme ??
-              widget.theme ??
-              ThemeData.fallback(),
-          themeMode: StaticData.themeMode ?? widget.themeMode,
-          locale: MitX.locale ?? widget.locale,
-          localizationsDelegates: widget.localizationsDelegates,
-          localeListResolutionCallback: widget.localeListResolutionCallback,
-          localeResolutionCallback: widget.localeResolutionCallback,
-          supportedLocales: widget.supportedLocales,
-          debugShowMaterialGrid: widget.debugShowMaterialGrid,
-          showPerformanceOverlay: widget.showPerformanceOverlay,
-          checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
-          checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-          showSemanticsDebugger: widget.showSemanticsDebugger,
-          debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-          shortcuts: widget.shortcuts,
-          scrollBehavior: widget.scrollBehavior,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
-          //   actions: actions,
-        );
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: widget.routes ?? const <String, WidgetBuilder>{},
+      navigatorObservers: (widget.navigatorObservers == null
+          ? <NavigatorObserver>[
+              GetObserver(widget.routingCallback, MitX.routing)
+            ]
+          : <NavigatorObserver>[
+              GetObserver(widget.routingCallback, MitX.routing)
+            ]
+        ..addAll(widget.navigatorObservers!)),
+      title: widget.title,
+      navigatorKey: StaticData.navigateKey,
+      scaffoldMessengerKey: widget.scaffoldMessengerKey,
+      home: widget.home,
+      initialRoute: widget.initialRoute,
+      onGenerateRoute: widget.onGenerateRoute,
+      onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
+      onUnknownRoute: widget.onUnknownRoute,
+      builder: defaultBuilder,
+      onGenerateTitle: widget.onGenerateTitle,
+      color: widget.color,
+      theme: widget.theme,
+      darkTheme: widget.darkTheme,
+      themeMode: ThemesAndroid.getThemeMode,
+      highContrastTheme: widget.highContrastTheme,
+      highContrastDarkTheme: widget.highContrastDarkTheme,
+      locale: MitX.locale ?? widget.locale,
+      localizationsDelegates: widget.localizationsDelegates,
+      localeListResolutionCallback: widget.localeListResolutionCallback,
+      localeResolutionCallback: widget.localeResolutionCallback,
+      supportedLocales:
+          widget.supportedLocales ?? const <Locale>[Locale('en', 'US')],
+      debugShowMaterialGrid: widget.debugShowMaterialGrid,
+      showPerformanceOverlay: widget.showPerformanceOverlay,
+      checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
+      checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
+      showSemanticsDebugger: widget.showSemanticsDebugger,
+      debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
+      shortcuts: widget.shortcuts,
+      actions: widget.actions,
+      scrollBehavior: widget.scrollBehavior,
+      useInheritedMediaQuery: widget.useInheritedMediaQuery,
+    );
+  }
 
   Widget defaultBuilder(BuildContext context, Widget? child) {
     return Directionality(
@@ -315,19 +282,5 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           ? (child ?? const Material())
           : widget.builder!(context, child ?? const Material()),
     );
-  }
-
-  Route<dynamic> generator(RouteSettings settings) {
-    return PageRedirect(settings: settings, unknownRoute: widget.unknownRoute)
-        .page();
-  }
-
-  List<Route<dynamic>> initialRoutesGenerate(String name) {
-    return [
-      PageRedirect(
-        settings: RouteSettings(name: name),
-        unknownRoute: widget.unknownRoute,
-      ).page()
-    ];
   }
 }

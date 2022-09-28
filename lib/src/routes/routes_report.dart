@@ -36,7 +36,7 @@ class RouterReportManager<T> {
     }
   }
 
-  static void clearRouteKeys() {
+  static void clearRouteStaticData() {
     _routesKey.clear();
     _routesByCreate.clear();
   }
@@ -54,9 +54,9 @@ class RouterReportManager<T> {
   }
 
   static void reportRouteWillDispose(Route disposed) {
-    final keysToRemove = <String>[];
+    final StaticDataToRemove = <String>[];
 
-    _routesKey[disposed]?.forEach(keysToRemove.add);
+    _routesKey[disposed]?.forEach(StaticDataToRemove.add);
 
     /// Removes `MitX.create()` instances registered in `routeName`.
     if (_routesByCreate.containsKey(disposed)) {
@@ -69,7 +69,7 @@ class RouterReportManager<T> {
       _routesByCreate.remove(disposed);
     }
 
-    keysToRemove.clear();
+    StaticDataToRemove.clear();
   }
 
   /// Clears from memory registered Instances associated with [routeName] when
@@ -77,9 +77,9 @@ class RouterReportManager<T> {
   /// [SmartManagement.keepFactory]
   /// Meant for internal usage of `MitXPageRoute` and `MitXDialogRoute`
   static void _removeDependencyByRoute(Route routeName) {
-    final keysToRemove = <String>[];
+    final StaticDataToRemove = <String>[];
 
-    _routesKey[routeName]?.forEach(keysToRemove.add);
+    _routesKey[routeName]?.forEach(StaticDataToRemove.add);
 
     /// Removes `MitX.create()` instances registered in `routeName`.
     if (_routesByCreate.containsKey(routeName)) {
@@ -92,10 +92,10 @@ class RouterReportManager<T> {
       _routesByCreate.remove(routeName);
     }
 
-    for (final element in keysToRemove) {
+    for (final element in StaticDataToRemove) {
       _routesKey[routeName]?.remove(element);
     }
 
-    keysToRemove.clear();
+    StaticDataToRemove.clear();
   }
 }
