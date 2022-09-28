@@ -25,7 +25,7 @@
 ```dart
  class LangController implements Translations {
   @override
-  Map<String, Map<String, String>> get StaticData => {
+  Map<String, Map<String, String>> get keys => {
         'en': {
             'test':'test',
         }
@@ -269,7 +269,7 @@ MitX.bottomSheet is like showModalBottomSheet, but don't need of context.
 
 ## Change Theme
 
-Please do not use any higher level widget than `MitXMaterialApp` in order to update it. This can trigger duplicate StaticData. A lot of people are used to the prehistoric approach of creating a "ThemeProvider" widget just to change the theme of your app, and this is definitely NOT necessary with **MitX_X™**.
+Please do not use any higher level widget than `MitXMaterialApp` in order to update it. This can trigger duplicate key. A lot of people are used to the prehistoric approach of creating a "ThemeProvider" widget just to change the theme of your app, and this is definitely NOT necessary with **MitX_X™**.
 
 You can create your custom theme and simply add it within `MitX.changeTheme` without any boilerplate for that:
 

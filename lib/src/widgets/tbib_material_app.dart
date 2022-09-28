@@ -194,16 +194,16 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
       MitX.addPages(widget.mitXPages!);
     }
 
-    if (widget.locale != null) MitX.locale = widget.locale;
-
-    if (widget.fallbackLocale != null) {
-      MitX.fallbackLocale = widget.fallbackLocale;
-    }
-
     if (widget.translations != null) {
       MitX.addTranslations(widget.translations!.keys);
     } else if (widget.translationsKey != null) {
       MitX.addTranslations(widget.translationsKey!);
+    }
+
+    if (widget.locale != null) MitX.locale = widget.locale;
+
+    if (widget.fallbackLocale != null) {
+      MitX.fallbackLocale = widget.fallbackLocale;
     }
 
     MitX.customTransition = widget.customTransition;
@@ -216,6 +216,7 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
       defaultDurationTransition:
           widget.transitionDuration ?? MitX.defaultTransitionDuration,
     );
+    MitX.locale ??= widget.supportedLocales.elementAt(0);
 
     super.initState();
   }
