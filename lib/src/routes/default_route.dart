@@ -45,7 +45,7 @@ class GetPageRoute<T> extends PageRoute<T>
     this.barrierLabel,
     this.maintainState = true,
     bool fullscreenDialog = false,
-    this.middlewares,
+    // this.middlewares,
   }) : super(settings: settings, fullscreenDialog: fullscreenDialog);
 
   @override
@@ -78,13 +78,13 @@ class GetPageRoute<T> extends PageRoute<T>
   @override
   final bool maintainState;
 
-  final List<MitXMiddleware>? middlewares;
+  // final List<MitXMiddleware>? middlewares;
 
   Widget? _child;
 
   Widget _getChild() {
     if (_child != null) return _child!;
-    final middlewareRunner = MiddlewareRunner(middlewares);
+    final middlewareRunner = MiddlewareRunner();
 
     final pageToBuild = middlewareRunner.runOnPageBuildStart(page)!;
     _child = middlewareRunner.runOnPageBuilt(pageToBuild());

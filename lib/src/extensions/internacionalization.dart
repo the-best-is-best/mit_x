@@ -84,7 +84,7 @@ extension Trans on String {
     // print(MitX.locale!.languageCode);
     // print('contains');
     // print(MitX.translations.containsKey(MitX.locale!.languageCode));
-    // print(MitX.translations.StaticData);
+    // print(MitX.translations.key);
     // Returns the key if locale is null.
     if (MitX.locale?.languageCode == null) return this;
 

@@ -1199,8 +1199,6 @@ you can only use widgets and widget functions here''';
 
   Map<dynamic, GlobalKey<NavigatorState>> get keys => StaticData.keys;
 
-  StaticData get rootController => StaticData();
-
   bool get defaultPopGesture => StaticData.defaultPopGesture;
   bool get defaultOpaqueRoute => StaticData.defaultOpaqueRoute;
 

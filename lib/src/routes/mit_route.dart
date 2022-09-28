@@ -21,7 +21,6 @@ class MitXPage<T> extends Page<T> {
   final Duration? transitionDuration;
   final bool fullscreenDialog;
   final bool preventDuplicates;
-  final List<MitXMiddleware>? middlewares;
 
   // @override
   // final LocalKey? key;
@@ -61,7 +60,6 @@ class MitXPage<T> extends Page<T> {
     this.unknownRoute,
     this.arguments,
     this.showCupertinoParallax = true,
-    this.middlewares,
     this.preventDuplicates = true,
   })  : path = _nameToRegex(name),
         assert(name.startsWith('/'),
@@ -95,7 +93,6 @@ class MitXPage<T> extends Page<T> {
     bool? participatesInRootNavigator,
     Object? arguments,
     bool? showCupertinoParallax,
-    List<MitXMiddleware>? middlewares,
   }) {
     return MitXPage(
       participatesInRootNavigator:
@@ -114,7 +111,6 @@ class MitXPage<T> extends Page<T> {
       customTransition: customTransition ?? this.customTransition,
       transitionDuration: transitionDuration ?? this.transitionDuration,
       fullscreenDialog: fullscreenDialog ?? this.fullscreenDialog,
-      middlewares: middlewares,
       children: children ?? this.children,
       unknownRoute: unknownRoute ?? this.unknownRoute,
       gestureWidth: gestureWidth ?? this.gestureWidth,
@@ -137,7 +133,7 @@ class MitXPage<T> extends Page<T> {
   }
 
   static PathDecoded _nameToRegex(String path) {
-    var StaticData = <String?>[];
+    var key = <String?>[];
 
     String _replace(Match pattern) {
       var buffer = StringBuffer('(?:');
@@ -146,7 +142,7 @@ class MitXPage<T> extends Page<T> {
       buffer.write('([\\w%+-._~!\$&\'()*,;=:@]+))');
       if (pattern[3] != null) buffer.write('?');
 
-      StaticData.add(pattern[2]);
+      key.add(pattern[2]);
       return "$buffer";
     }
 
@@ -154,7 +150,7 @@ class MitXPage<T> extends Page<T> {
         .replaceAllMapped(RegExp(r'(\.)?:(\w+)(\?)?'), _replace)
         .replaceAll('//', '/');
 
-    return PathDecoded(RegExp('^$stringPath\$'), StaticData);
+    return PathDecoded(RegExp('^$stringPath\$'), key);
   }
 }
 
@@ -172,6 +168,6 @@ class PathDecoded {
     if (identical(this, other)) return true;
 
     return other is PathDecoded &&
-        other.regex == regex; // && listEquals(other.StaticData, StaticData);
+        other.regex == regex; // && listEquals(other.key, key);
   }
 }

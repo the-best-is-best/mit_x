@@ -1,7 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/widgets.dart';
 import 'package:mit_x/src/interface.dart';
-import 'package:mit_x/src/services/lifecycle.dart';
 
 class RouterReportManager<T> {
   /// Holds a reference to `MitX.reference` when the Instance was
@@ -36,15 +35,9 @@ class RouterReportManager<T> {
     }
   }
 
-  static void clearRouteStaticData() {
+  static void clearRouteKey() {
     _routesKey.clear();
     _routesByCreate.clear();
-  }
-
-  static void appendRouteByCreate(MitXLifeCycleBase i) {
-    _routesByCreate[_current] ??= HashSet<Function>();
-    // _routesByCreate[MitX.reference]!.add(i.onDelete as Function);
-    _routesByCreate[_current]!.add(i.onDelete);
   }
 
   static void reportRouteDispose(Route disposed) {
@@ -54,9 +47,9 @@ class RouterReportManager<T> {
   }
 
   static void reportRouteWillDispose(Route disposed) {
-    final StaticDataToRemove = <String>[];
+    final keyToRemove = <String>[];
 
-    _routesKey[disposed]?.forEach(StaticDataToRemove.add);
+    _routesKey[disposed]?.forEach(keyToRemove.add);
 
     /// Removes `MitX.create()` instances registered in `routeName`.
     if (_routesByCreate.containsKey(disposed)) {
@@ -69,7 +62,7 @@ class RouterReportManager<T> {
       _routesByCreate.remove(disposed);
     }
 
-    StaticDataToRemove.clear();
+    keyToRemove.clear();
   }
 
   /// Clears from memory registered Instances associated with [routeName] when
@@ -77,9 +70,9 @@ class RouterReportManager<T> {
   /// [SmartManagement.keepFactory]
   /// Meant for internal usage of `MitXPageRoute` and `MitXDialogRoute`
   static void _removeDependencyByRoute(Route routeName) {
-    final StaticDataToRemove = <String>[];
+    final keyToRemove = <String>[];
 
-    _routesKey[routeName]?.forEach(StaticDataToRemove.add);
+    _routesKey[routeName]?.forEach(keyToRemove.add);
 
     /// Removes `MitX.create()` instances registered in `routeName`.
     if (_routesByCreate.containsKey(routeName)) {
@@ -92,10 +85,10 @@ class RouterReportManager<T> {
       _routesByCreate.remove(routeName);
     }
 
-    for (final element in StaticDataToRemove) {
+    for (final element in keyToRemove) {
       _routesKey[routeName]?.remove(element);
     }
 
-    StaticDataToRemove.clear();
+    keyToRemove.clear();
   }
 }

@@ -5,8 +5,6 @@ export 'src/interface.dart';
 export 'src/routes/observer/route_observer.dart';
 export 'src/static/static_data.dart';
 export 'src/routes/routes_report.dart';
-export 'src/routes/routes_manager.dart';
-
 export 'src/widgets/tbib_bottom_sheet.dart';
 export 'src/widgets/tbib_dialog.dart';
 export 'src/widgets/snackbar/snackbar.dart';

@@ -8,22 +8,6 @@ import 'package:mit_x/src/routes/mit_route.dart';
 import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 abstract class _RouteMiddleware {
-  /// The Order of the Middlewares to run.
-  ///
-  /// {@tool snippet}
-  /// This Middewares will be called in this order.
-  /// ```dart
-  /// final middlewares = [
-  ///   GetMiddleware(priority: 2),
-  ///   GetMiddleware(priority: 5),
-  ///   GetMiddleware(priority: 4),
-  ///   GetMiddleware(priority: -8),
-  /// ];
-  /// ```
-  ///  -8 => 2 => 4 => 5
-  /// {@end-tool}
-  int? priority;
-
   /// This function will be called when the page of
   /// the called route is being searched for.
   /// It take RouteSettings as a result an redirect to the new settings or
@@ -31,7 +15,7 @@ abstract class _RouteMiddleware {
   /// {@tool snippet}
   /// ```dart
   /// GetPage redirect(String route) {
-  ///   final authService = Get.find<AuthService>();
+
   ///   return authService.authed.value ? null : RouteSettings(name: '/login');
   /// }
   /// ```
@@ -50,7 +34,6 @@ abstract class _RouteMiddleware {
   /// {@tool snippet}
   /// ```dart
   /// GetNavConfig? redirect(GetNavConfig route) {
-  ///   final authService = Get.find<AuthService>();
   ///   return authService.authed.value ? null : RouteSettings(name: '/login');
   /// }
   /// ```
@@ -84,11 +67,6 @@ abstract class _RouteMiddleware {
 /// [onPageBuildStart] -> [onPageBuilt] -> [onPageDispose] ))
 class MitXMiddleware implements _RouteMiddleware {
   @override
-  int? priority = 0;
-
-  MitXMiddleware({this.priority});
-
-  @override
   RouteSettings? redirect(String? route) => null;
 
   @override
@@ -109,16 +87,10 @@ class MitXMiddleware implements _RouteMiddleware {
 }
 
 class MiddlewareRunner {
-  MiddlewareRunner(this._middlewares);
-
-  final List<MitXMiddleware>? _middlewares;
-
   List<MitXMiddleware> _getMiddlewares() {
-    final _m = _middlewares ?? <MitXMiddleware>[];
-    return _m
-      ..sort(
-        (a, b) => (a.priority ?? 0).compareTo(b.priority ?? 0),
-      );
+    final _m = <MitXMiddleware>[];
+
+    return _m;
   }
 
   MitXPage? runOnPageCalled(MitXPage? page) {
@@ -237,20 +209,10 @@ class PageRedirect {
       return false;
     }
 
-    final runner = MiddlewareRunner(match.route!.middlewares);
+    final runner = MiddlewareRunner();
     route = runner.runOnPageCalled(match.route);
     addPageParameter(route!);
-
-    // No middlewares found return match.
-    if (match.route!.middlewares == null || match.route!.middlewares!.isEmpty) {
-      return false;
-    }
-    final newSettings = runner.runRedirect(settings!.name);
-    if (newSettings == null) {
-      return false;
-    }
-    settings = newSettings;
-    return true;
+    return false;
   }
 
   void addPageParameter(MitXPage route) {

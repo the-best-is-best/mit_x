@@ -190,6 +190,9 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
   @override
   void initState() {
     StaticData.navigateKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
+    if (widget.mitXPages != null) {
+      MitX.addPages(widget.mitXPages!);
+    }
 
     if (widget.locale != null) MitX.locale = widget.locale;
 
@@ -204,10 +207,6 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
     }
 
     MitX.customTransition = widget.customTransition;
-
-    if (widget.mitXPages != null) {
-      MitX.addPages(widget.mitXPages!);
-    }
 
     MitX.config(
       enableLog: widget.enableLog,
