@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mit_x/mit_x.dart';
+import 'package:mit_x/src/extensions/form_state_extension.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/default_route.dart';
 import 'package:mit_x/src/routes/delegate/get_router_delegate.dart';
@@ -1270,6 +1271,17 @@ you can only use widgets and widget functions here''';
   void closeEndDrawer() {
     context?.closeEndDrawer();
   }
+
+  void saveForm() {
+    StaticData.formKey.save();
+  }
+
+  void isValidForm() {
+    StaticData.formKey.isValid();
+  }
+
+  GlobalKey<ScaffoldState> get scaffoldKey => StaticData.scaffoldKey;
+  GlobalKey<FormState> get formKey => StaticData.formKey;
 }
 
 extension NavTwoExt on MitXInterface {

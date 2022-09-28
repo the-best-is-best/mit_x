@@ -6,9 +6,11 @@ import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 class StaticData {
   static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   static ThemeData? theme;
   static ThemeData? darkTheme;
   static ThemeMode? themeMode;
+  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 

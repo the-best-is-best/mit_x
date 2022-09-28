@@ -1,3 +1,18 @@
+## 1.0.1
+
+* support open or close drawer or end drawer and form isValid or save form
+  see it in readme
+
+## 1.0.0
+
+* library now stable
+* now support MitXPages for solve arguments not working when use amy navigate like
+  ```dart
+   MitX.toNamed('/secPage' ,arguments:{'id':1}) 
+   // use
+   MitX.arguments; // return null value
+  ```
+
 ## 0.0.6
 
 * Solve Score.

@@ -209,6 +209,45 @@ print(MitX.parameters['country']);
 
 ## Navigation without context
 
+### drawer
+
+Now you can use scaffold key and open drawer 
+
+```dart
+  Scaffold(
+      key: MitX.scaffoldKey,
+      drawer: Drawer(),
+      ...
+    ),
+
+    MitX.openDrawer();
+// if you generated key you can use
+// yourKey.openDrawer(); or openDrawer.openEndDrawer(); 
+// you can close it by yourKey.closeDrawer(); 
+// if use my key you can use MitX.closeDrawer();
+
+```
+
+
+
+### form key
+Now you can use form key and valid or save form 
+
+
+```dart
+  Form(
+      key: MitX.formKey,
+      ...
+    ),
+    MitX.saveForm();
+    MitX.isValidForm();
+    // 
+// if form key with your key use
+// yourKey.isValid();
+// yourKey.save();
+```
+
+
 ### SnackBars
 
 To have a simple SnackBar with Flutter, you must get the context of Scaffold, or you must use a GlobalKey attached to your Scaffold
@@ -226,7 +265,7 @@ final snackBar = SnackBar(
 Scaffold.of(context).showSnackBar(snackBar);
 ```
 
-With MitX_X:
+With MitX:
 
 ```dart
    MitX.showSnackbar(MitXSnackBar());
