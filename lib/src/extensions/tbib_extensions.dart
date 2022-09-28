@@ -814,7 +814,6 @@ you can only use widgets and widget functions here''';
     bool canPop = true,
     int? id,
   }) {
-    //TODO: This code brings compatibility of the new snackbar with GetX 4,
     // remove this code in version 5
     if (isSnackbarOpen && !closeOverlays) {
       closeCurrentSnackbar();
@@ -1254,6 +1253,22 @@ you can only use widgets and widget functions here''';
     themeMode = MitX.isDarkMode ? ThemeMode.light : ThemeMode.dark;
     ThemesAndroid.seThemeMode = themeMode;
     await forceAppUpdate();
+  }
+
+  void openDrawer() {
+    context?.openDrawer();
+  }
+
+  void closeDrawer() {
+    context?.closeDrawer();
+  }
+
+  void openEndDrawer() {
+    context?.openEndDrawer();
+  }
+
+  void closeEndDrawer() {
+    context?.closeEndDrawer();
   }
 }
 

@@ -212,11 +212,11 @@ class MitXSnackBarState extends State<MitXSnackBar>
   AnimationController? _fadeController;
   late Animation<double> _fadeAnimation;
 
-  final Widget _emptyWidget = SizedBox(width: 0.0, height: 0.0);
+  final Widget _emptyWidget = const SizedBox(width: 0.0, height: 0.0);
   final double _initialOpacity = 1.0;
   final double _finalOpacity = 0.4;
 
-  final Duration _pulseAnimationDuration = Duration(seconds: 1);
+  final Duration _pulseAnimationDuration = const Duration(seconds: 1);
 
   late bool _isTitlePresent;
   late double _messageTopMargin;
@@ -500,7 +500,7 @@ You need to either use message[String], or messageText[Widget] or define a userI
                         child: widget.titleText ??
                             Text(
                               widget.title ?? "",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -519,8 +519,8 @@ You need to either use message[String], or messageText[Widget] or define a userI
                       child: widget.messageText ??
                           Text(
                             widget.message ?? "",
-                            style:
-                                TextStyle(fontSize: 14.0, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 14.0, color: Colors.white),
                           ),
                     ),
                   ],

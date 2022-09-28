@@ -10,7 +10,6 @@ extension MitXNumUtils on num {
   bool isEqual(num b) => MitXUtils.isEqual(this, b);
 
   /// Utility to delay some callback (or code execution).
-  /// TODO: Add a separated implementation of delay() with the ability
   /// to stop it.
   ///
   /// Sample:
@@ -48,21 +47,4 @@ extension MitXNumUtils on num {
       Duration(minutes: (this * Duration.minutesPerHour).round());
 
   Duration get days => Duration(hours: (this * Duration.hoursPerDay).round());
-
-//final _delayMaps = <Function, Future>{};
-// TODO: create a proper Future and control the Timer.
-//  Future delay([double seconds = 0, VoidCallback callback]) async {
-//    final ms = (seconds * 1000).round();
-//    return Future.delayed(Duration(milliseconds: ms), callback);
-//  return _delayMaps[callback];
-//  }
-//killDelay(VoidCallback callback) {
-//  if (_delayMaps.containsKey(callback)) {
-//    _delayMaps[callback]?.timeout(Duration.zero, onTimeout: () {
-//      print('callbacl eliminado!');
-//    });
-//    _delayMaps.remove(callback);
-//  }
-//}
-
 }

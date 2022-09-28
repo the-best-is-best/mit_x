@@ -198,6 +198,7 @@ class _GetCupertinoAppState extends State<GetCupertinoApp> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) => widget.routerDelegate != null
       ? CupertinoApp.router(
           routerDelegate: widget.routerDelegate!,
@@ -272,7 +273,7 @@ class _GetCupertinoAppState extends State<GetCupertinoApp> {
               : TextDirection.ltr),
       child: widget.builder == null
           ? (child ?? const Material())
-          : widget.builder!(context, child ?? Material()),
+          : widget.builder!(context, child ?? const Material()),
     );
   }
 
