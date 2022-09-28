@@ -82,7 +82,7 @@ class GetPageRoute<T> extends PageRoute<T>
 
   Widget _getChild() {
     if (_child != null) return _child!;
-    final middlewareRunner = MiddlewareRunner();
+    final middlewareRunner = RunnerGetRoutePage();
 
     final pageToBuild = middlewareRunner.runOnPageBuildStart(page)!;
     _child = middlewareRunner.runOnPageBuilt(pageToBuild());
