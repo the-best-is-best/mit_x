@@ -1,3 +1,8 @@
+## 1.0.2
+
+* Solve Transition class not found
+* unFocusField now available
+
 ## 1.0.1
 
 * support open or close drawer or end drawer and form isValid or save form

@@ -9,7 +9,6 @@ import 'package:mit_x/src/routes/default_route.dart';
 import 'package:mit_x/src/routes/delegate/get_router_delegate.dart';
 import 'package:mit_x/src/routes/parse/get_information_parser.dart';
 import 'package:mit_x/src/routes/parse/parse_route.dart';
-import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 /// It replaces the Flutter Navigator, but needs no context.
 /// You can to use navigator.push(YourRoute()) rather
@@ -1276,8 +1275,12 @@ you can only use widgets and widget functions here''';
     StaticData.formKey.save();
   }
 
-  void isValidForm() {
-    StaticData.formKey.isValid();
+  bool isValidForm() {
+    return StaticData.formKey.isValid();
+  }
+
+  void unFocusField() {
+    context?.unFocusField();
   }
 
   GlobalKey<ScaffoldState> get scaffoldKey => StaticData.scaffoldKey;

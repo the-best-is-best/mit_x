@@ -1,6 +1,6 @@
 name: mit_x
 description: Open screens/snackbars/dialogs/drawer without context /open and close drawer or end drawer/check form is valid or save it, with MitX.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/the-best-is-best/mit_x
 
 environment:

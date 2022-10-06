@@ -155,4 +155,8 @@ extension ContextExtensionss on BuildContext {
   void closeEndDrawer() {
     StaticData.scaffoldKey.currentState?.closeEndDrawer();
   }
+
+  void unFocusField() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 }

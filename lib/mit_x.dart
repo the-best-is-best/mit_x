@@ -27,5 +27,5 @@ export 'src/extensions/num_extensions.dart';
 export 'src/extensions/iterable_extensions.dart';
 export 'src/extensions/string_extensions.dart';
 export 'src/extensions/widget_extensions.dart';
-
 export 'src/get_utils/get_utils.dart';
+export 'src/routes/transition/transitions_type.dart';
