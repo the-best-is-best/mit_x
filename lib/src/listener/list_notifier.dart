@@ -150,11 +150,11 @@ class TaskManager {
 
   List<VoidCallback>? _remove;
 
-  void notify(List<GetStateUpdate?>? _updaters) {
+  void notify(List<GetStateUpdate?>? updaters) {
     if (_setter != null) {
-      if (!_updaters!.contains(_setter)) {
-        _updaters.add(_setter);
-        _remove!.add(() => _updaters.remove(_setter));
+      if (!updaters!.contains(_setter)) {
+        updaters.add(_setter);
+        _remove!.add(() => updaters.remove(_setter));
       }
     }
   }

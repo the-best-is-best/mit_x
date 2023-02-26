@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mit_x/mit_x.dart';
-import 'package:mit_x/src/extensions/form_state_extension.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/default_route.dart';
 import 'package:mit_x/src/routes/delegate/get_router_delegate.dart';
@@ -219,7 +218,7 @@ extension ExtensionDialog on MitXInterface {
             child: Text(
               textConfirm ?? "Ok",
               style:
-                  TextStyle(color: confirmTextColor ?? theme.backgroundColor),
+                  TextStyle(color: confirmTextColor ?? theme.colorScheme.background),
             ),
             onPressed: () {
               onConfirm?.call();

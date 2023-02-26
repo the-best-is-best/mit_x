@@ -207,7 +207,7 @@ class Routing {
     this.isDialog,
   });
 
-  void update(void fn(Routing value)) {
+  void update(void Function(Routing value) fn) {
     fn(this);
   }
 }

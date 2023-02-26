@@ -1,4 +1,4 @@
-## 1.0.3
+## 1.0.3 - ## 1.0.4
 
 - Solve bug can't use your {formKey}.save() or {fromKey}.isValid()
 

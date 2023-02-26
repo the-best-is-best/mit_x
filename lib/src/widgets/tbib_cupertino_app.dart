@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/route_redirect.dart';
-import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 class GetCupertinoApp extends StatefulWidget {
   final GlobalKey<NavigatorState>? navigatorKey;

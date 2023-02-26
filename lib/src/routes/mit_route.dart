@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mit_x/mit_x.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/route_redirect.dart';
-import 'package:mit_x/src/routes/transition/transitions_type.dart';
 
 class MitXPage<T> extends Page<T> {
   final MitXPageBuilder page;
@@ -123,13 +122,13 @@ class MitXPage<T> extends Page<T> {
   @override
   Route<T> createRoute(BuildContext context) {
     // return GetPageRoute<T>(settings: this, page: page);
-    final _page = PageRedirect(
+    final page = PageRedirect(
       route: this,
       settings: this,
       unknownRoute: unknownRoute,
     ).getPageToRoute<T>(this, unknownRoute);
 
-    return _page;
+    return page;
   }
 
   static PathDecoded _nameToRegex(String path) {
@@ -138,7 +137,7 @@ class MitXPage<T> extends Page<T> {
     String _replace(Match pattern) {
       var buffer = StringBuffer('(?:');
 
-      if (pattern[1] != null) buffer.write('\.');
+      if (pattern[1] != null) buffer.write('.');
       buffer.write('([\\w%+-._~!\$&\'()*,;=:@]+))');
       if (pattern[3] != null) buffer.write('?');
 

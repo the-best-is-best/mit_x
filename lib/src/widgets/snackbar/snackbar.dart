@@ -432,9 +432,9 @@ You need to either use message[String], or messageText[Widget] or define a userI
         padding: const EdgeInsets.only(
             left: 8.0, right: 8.0, bottom: 8.0, top: 16.0),
         child: FocusScope(
-          child: widget.userInputForm!,
           node: _focusNode,
           autofocus: true,
+          child: widget.userInputForm!,
         ),
       ),
     );

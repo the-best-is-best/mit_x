@@ -42,52 +42,52 @@ class PageRedirect {
   // redirect all pages that needes redirecting
   GetPageRoute<T> page<T>() {
     while (needRecheck()) {}
-    final _r = (isUnknown ? unknownRoute : route)!;
+    final r = (isUnknown ? unknownRoute : route)!;
     return GetPageRoute<T>(
-      page: _r.page,
-      parameter: _r.parameters,
+      page: r.page,
+      parameter: r.parameters,
       settings: isUnknown
           ? RouteSettings(
-              name: _r.name,
+              name: r.name,
               arguments: settings!.arguments,
             )
           : settings,
-      curve: _r.curve,
-      opaque: _r.opaque,
-      showCupertinoParallax: _r.showCupertinoParallax,
-      gestureWidth: _r.gestureWidth,
-      customTransition: _r.customTransition,
+      curve: r.curve,
+      opaque: r.opaque,
+      showCupertinoParallax: r.showCupertinoParallax,
+      gestureWidth: r.gestureWidth,
+      customTransition: r.customTransition,
       transitionDuration:
-          _r.transitionDuration ?? MitX.defaultTransitionDuration,
-      transition: _r.transition,
-      popGesture: _r.popGesture,
-      fullscreenDialog: _r.fullscreenDialog,
+          r.transitionDuration ?? MitX.defaultTransitionDuration,
+      transition: r.transition,
+      popGesture: r.popGesture,
+      fullscreenDialog: r.fullscreenDialog,
     );
   }
 
   // redirect all pages that needes redirecting
   GetPageRoute<T> getPageToRoute<T>(MitXPage rou, MitXPage? unk) {
     while (needRecheck()) {}
-    final _r = (isUnknown ? unk : rou)!;
+    final r = (isUnknown ? unk : rou)!;
 
     return GetPageRoute<T>(
-      page: _r.page,
-      parameter: _r.parameters,
-      alignment: _r.alignment,
-      title: _r.title,
-      maintainState: _r.maintainState,
-      routeName: _r.name,
-      settings: _r,
-      curve: _r.curve,
-      showCupertinoParallax: _r.showCupertinoParallax,
-      gestureWidth: _r.gestureWidth,
-      opaque: _r.opaque,
-      customTransition: _r.customTransition,
+      page: r.page,
+      parameter: r.parameters,
+      alignment: r.alignment,
+      title: r.title,
+      maintainState: r.maintainState,
+      routeName: r.name,
+      settings: r,
+      curve: r.curve,
+      showCupertinoParallax: r.showCupertinoParallax,
+      gestureWidth: r.gestureWidth,
+      opaque: r.opaque,
+      customTransition: r.customTransition,
       transitionDuration:
-          _r.transitionDuration ?? MitX.defaultTransitionDuration,
-      transition: _r.transition,
-      popGesture: _r.popGesture,
-      fullscreenDialog: _r.fullscreenDialog,
+          r.transitionDuration ?? MitX.defaultTransitionDuration,
+      transition: r.transition,
+      popGesture: r.popGesture,
+      fullscreenDialog: r.fullscreenDialog,
     );
   }
 
