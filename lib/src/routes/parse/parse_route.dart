@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:mit_x/src/routes/mit_route.dart';
 
 class RouteDecoder {
@@ -44,7 +46,7 @@ class ParseRouteTree {
     ];
     for (var item in split) {
       if (curPath.endsWith('/')) {
-        curPath += '$item';
+        curPath += item;
       } else {
         curPath += '/$item';
       }
