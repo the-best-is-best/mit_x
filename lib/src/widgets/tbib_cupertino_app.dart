@@ -5,7 +5,7 @@ import 'package:mit_x/mit_x.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/route_redirect.dart';
 
-class GetCupertinoApp extends StatefulWidget {
+class MitXCupertinoApp extends StatefulWidget {
   final GlobalKey<NavigatorState>? navigatorKey;
 
   final Widget? home;
@@ -52,7 +52,7 @@ class GetCupertinoApp extends StatefulWidget {
   final BackButtonDispatcher? backButtonDispatcher;
   final CupertinoThemeData? theme;
   final bool useInheritedMediaQuery;
-  const GetCupertinoApp({
+  const MitXCupertinoApp({
     Key? key,
     this.theme,
     this.navigatorKey,
@@ -103,7 +103,7 @@ class GetCupertinoApp extends StatefulWidget {
         backButtonDispatcher = null,
         super(key: key);
 
-  GetCupertinoApp.router({
+  MitXCupertinoApp.router({
     Key? key,
     this.theme,
     this.routeInformationProvider,
@@ -163,10 +163,10 @@ class GetCupertinoApp extends StatefulWidget {
   }
 
   @override
-  State<GetCupertinoApp> createState() => _GetCupertinoAppState();
+  State<MitXCupertinoApp> createState() => _MitXCupertinoAppState();
 }
 
-class _GetCupertinoAppState extends State<GetCupertinoApp> {
+class _MitXCupertinoAppState extends State<MitXCupertinoApp> {
   @override
   void initState() {
     StaticData.navigateKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();

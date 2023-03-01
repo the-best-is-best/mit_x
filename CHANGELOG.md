@@ -1,3 +1,7 @@
+## 1.0.4
+
+- solve bug MitXCupertinoApp not found
+
 ## 1.0.3
 
 - Solve bug can't use your {formKey}.save() or {fromKey}.isValid()
