@@ -9,6 +9,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  fluent_ui: ^4.4.2
   flutter:
     sdk: flutter
   flutter_platform_widgets: ^3.3.1

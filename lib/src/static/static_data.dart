@@ -5,6 +5,9 @@ import 'package:mit_x/src/routes/custom_transition.dart';
 
 class StaticData {
   static GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  static bool macosFluent = false;
+  static bool linuxFluent = false;
+  static bool windowsFluent = false;
 
   static ThemeData? theme;
   static ThemeData? darkTheme;
