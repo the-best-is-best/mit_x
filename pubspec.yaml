@@ -1,5 +1,6 @@
 name: mit_x
-description: Open screens/snackbars/dialogs/drawer without context /open and close drawer or end drawer/check form is valid or save it, with MitX.
+description: Open screens/snackbars/dialogs/drawer without context /open and
+  close drawer or end drawer/check form is valid or save it, with MitX.
 version: 1.0.4
 homepage: https://github.com/the-best-is-best/mit_x
 
@@ -10,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_platform_widgets: ^3.3.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -20,6 +22,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter: null
+
 # To add assets to your package, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg

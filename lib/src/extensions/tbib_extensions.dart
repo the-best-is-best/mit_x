@@ -172,6 +172,7 @@ extension ExtensionDialog on MitXInterface {
 
     // the navigator used to push the dialog
     GlobalKey<NavigatorState>? navigatorKey,
+    Key? key,
   }) {
     var leanCancel = onCancel != null || textCancel != null;
     var leanConfirm = onConfirm != null || textConfirm != null;
@@ -217,8 +218,8 @@ extension ExtensionDialog on MitXInterface {
             ),
             child: Text(
               textConfirm ?? "Ok",
-              style:
-                  TextStyle(color: confirmTextColor ?? theme.colorScheme.background),
+              style: TextStyle(
+                  color: confirmTextColor ?? theme.colorScheme.background),
             ),
             onPressed: () {
               onConfirm?.call();
@@ -227,6 +228,7 @@ extension ExtensionDialog on MitXInterface {
     }
 
     Widget baseAlertDialog = AlertDialog(
+      key: key,
       titlePadding: titlePadding ?? const EdgeInsets.all(8),
       contentPadding: contentPadding ?? const EdgeInsets.all(8),
 
@@ -273,6 +275,7 @@ extension ExtensionDialog on MitXInterface {
 
 extension ExtensionSnackbar on MitXInterface {
   SnackbarController rawSnackbar({
+    Key? key,
     String? title,
     String? message,
     Widget? titleText,
@@ -311,6 +314,7 @@ extension ExtensionSnackbar on MitXInterface {
     Form? userInputForm,
   }) {
     final getSnackBar = MitXSnackBar(
+      key: key,
       snackbarStatus: snackbarStatus,
       title: title,
       message: message,
@@ -369,6 +373,7 @@ extension ExtensionSnackbar on MitXInterface {
   SnackbarController snackbar(
     String title,
     String message, {
+    Key? key,
     Color? colorText,
     Duration? duration = const Duration(seconds: 3),
 
@@ -408,6 +413,7 @@ extension ExtensionSnackbar on MitXInterface {
     Form? userInputForm,
   }) {
     final getSnackBar = MitXSnackBar(
+        key: key,
         snackbarStatus: snackbarStatus,
         titleText: titleText ??
             Text(
