@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Add Fluent UI And Macos ui library
+- Can set fluent ui to any platform and get it
+
 ## 1.0.4
 
 - solve bug MitXCupertinoApp not found

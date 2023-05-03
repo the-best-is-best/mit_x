@@ -12,6 +12,8 @@ export 'src/widgets/snackbar/snackbar_controller.dart';
 export 'src/widgets/tbib_material_app.dart';
 export 'src/widgets/tbib_cupertino_app.dart';
 export 'src/widgets/tbib_platform_app.dart';
+export 'src/widgets/tbib_fluent_ui_app.dart';
+export 'src/widgets/tbib_mac_ui_app.dart';
 
 export 'src/user_data/themes.dart';
 

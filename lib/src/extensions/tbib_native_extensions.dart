@@ -4,16 +4,21 @@ import 'package:fluent_ui/fluent_ui.dart' as fluent;
 
 extension TBIBNativeUIExtension on MitXInterface {
   void setFluentUITo(
-      {bool macos = false, bool linux = false, bool windows = true}) {
+      {bool macos = false,
+      bool linux = false,
+      bool windows = true,
+      bool android = false}) {
     StaticData.macosFluent = macos;
     StaticData.linuxFluent = linux;
     StaticData.windowsFluent = windows;
+    StaticData.androidFluent = android;
   }
 
   bool isFluentUITo() {
     return StaticData.macosFluent ||
         StaticData.linuxFluent ||
-        StaticData.windowsFluent;
+        StaticData.windowsFluent ||
+        StaticData.androidFluent;
   }
 
   void showNativeSnackBar(

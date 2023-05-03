@@ -52,6 +52,8 @@ class MitXCupertinoApp extends StatefulWidget {
   final BackButtonDispatcher? backButtonDispatcher;
   final CupertinoThemeData? theme;
   final bool useInheritedMediaQuery;
+  final String? restorationScopeId;
+  final ScrollBehavior? scrollBehavior;
   const MitXCupertinoApp({
     Key? key,
     this.theme,
@@ -97,6 +99,8 @@ class MitXCupertinoApp extends StatefulWidget {
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.actions,
+    this.restorationScopeId,
+    this.scrollBehavior,
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
@@ -142,6 +146,8 @@ class MitXCupertinoApp extends StatefulWidget {
     this.defaultGlobalState,
     this.getPages,
     this.unknownRoute,
+    this.restorationScopeId,
+    this.scrollBehavior,
   })  : routerDelegate = routerDelegate ??= MitX.createDelegate(
           notFoundRoute: unknownRoute,
         ),
@@ -222,6 +228,9 @@ class _MitXCupertinoAppState extends State<MitXCupertinoApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          actions: widget.actions,
+          restorationScopeId: widget.restorationScopeId,
+          scrollBehavior: widget.scrollBehavior,
         )
       : CupertinoApp(
           theme: widget.theme,
@@ -261,6 +270,10 @@ class _MitXCupertinoAppState extends State<MitXCupertinoApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          actions: widget.actions,
+          restorationScopeId: widget.restorationScopeId,
+          scrollBehavior: widget.scrollBehavior,
+
           //   actions: actions,
         );
 

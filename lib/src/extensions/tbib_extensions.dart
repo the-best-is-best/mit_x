@@ -1,5 +1,7 @@
 import 'dart:ui' as ui;
 
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mit_x/mit_x.dart';
@@ -1048,6 +1050,16 @@ you can only use widgets and widget functions here''';
 
   void changeTheme(ThemeData theme) async {
     StaticData.setTheme(theme);
+    await forceAppUpdate();
+  }
+
+  void changeFluentTheme(fluent.FluentThemeData theme) async {
+    StaticData.setFluentTheme(theme);
+    await forceAppUpdate();
+  }
+
+  void changeMacTheme(macos.MacosThemeData theme) async {
+    StaticData.setMacosTheme(theme);
     await forceAppUpdate();
   }
 

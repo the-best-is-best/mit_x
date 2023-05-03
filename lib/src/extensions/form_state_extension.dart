@@ -6,6 +6,7 @@ extension ExtensionFormState on GlobalKey<FormState> {
   }
 
   bool isValid() {
+    FocusManager.instance.primaryFocus?.unfocus();
     return currentState?.validate() ?? false;
   }
 }

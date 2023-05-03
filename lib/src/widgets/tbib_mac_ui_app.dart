@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:mit_x/mit_x.dart';
+import 'package:macos_ui/macos_ui.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/route_redirect.dart';
 
-class MitXPlatFormApp extends StatefulWidget {
+class MitXMacosApp extends StatefulWidget {
   final GlobalKey<NavigatorState>? navigatorKey;
-  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
+
   final Widget? home;
   final Map<String, WidgetBuilder>? routes;
   final String? initialRoute;
@@ -19,12 +20,8 @@ class MitXPlatFormApp extends StatefulWidget {
   final TransitionBuilder? builder;
   final String title;
   final GenerateAppTitle? onGenerateTitle;
-  final ThemeData? theme;
-  final ThemeData? darkTheme;
-  final ThemeMode themeMode;
   final CustomTransition? customTransition;
   final Color? color;
-  final Map<String, Map<String, String>>? translationsKey;
   final Translations? translations;
   final TextDirection? textDirection;
   final Locale? locale;
@@ -39,31 +36,33 @@ class MitXPlatFormApp extends StatefulWidget {
   final bool showSemanticsDebugger;
   final bool debugShowCheckedModeBanner;
   final Map<LogicalKeySet, Intent>? shortcuts;
-  final ScrollBehavior? scrollBehavior;
   final ThemeData? highContrastTheme;
   final ThemeData? highContrastDarkTheme;
   final Map<Type, Action<Intent>>? actions;
-  final bool debugShowMaterialGrid;
-  final ValueChanged<Routing?>? routingCallback;
+  final Function(Routing?)? routingCallback;
   final Transition? defaultTransition;
   final bool? opaqueRoute;
   final bool? enableLog;
   final bool? popGesture;
   final Duration? transitionDuration;
   final bool? defaultGlobalState;
-  final List<MitXPage>? mitXPages;
+  final List<MitXPage>? getPages;
   final MitXPage? unknownRoute;
   final RouteInformationProvider? routeInformationProvider;
   final RouteInformationParser<Object>? routeInformationParser;
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
-  final bool useInheritedMediaQuery;
-  final CupertinoThemeData? cupertinoTheme;
-  final TargetPlatform? initialPlatform;
-  const MitXPlatFormApp({
+  final MacosThemeData? theme;
+  final MacosThemeData? darkTheme;
+  final ThemeMode? themeMode;
+  final String? restorationScopeId;
+  final ScrollBehavior scrollBehavior;
+
+  // final bool useInheritedMediaQuery;
+  MitXMacosApp({
     Key? key,
-    //   this.navigatorKey,
-    this.scaffoldMessengerKey,
+    this.theme,
+    this.navigatorKey,
     this.home,
     Map<String, Widget Function(BuildContext)> this.routes =
         const <String, WidgetBuilder>{},
@@ -71,88 +70,78 @@ class MitXPlatFormApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    this.useInheritedMediaQuery = false,
     List<NavigatorObserver> this.navigatorObservers =
         const <NavigatorObserver>[],
     this.builder,
+    this.translations,
     this.textDirection,
     this.title = '',
     this.onGenerateTitle,
     this.color,
-    this.theme,
-    this.darkTheme,
-    this.themeMode = ThemeMode.system,
+    this.customTransition,
     this.locale,
     this.fallbackLocale,
     this.localizationsDelegates,
     this.localeListResolutionCallback,
     this.localeResolutionCallback,
     this.supportedLocales = const <Locale>[Locale('en', 'US')],
-    this.debugShowMaterialGrid = false,
     this.showPerformanceOverlay = false,
     this.checkerboardRasterCacheImages = false,
     this.checkerboardOffscreenLayers = false,
     this.showSemanticsDebugger = false,
     this.debugShowCheckedModeBanner = true,
     this.shortcuts,
-    this.scrollBehavior,
-    this.customTransition,
-    this.translationsKey,
-    this.translations,
+    // this.useInheritedMediaQuery = false,
+    this.unknownRoute,
     this.routingCallback,
     this.defaultTransition,
-    this.mitXPages,
+    this.getPages,
     this.opaqueRoute,
     this.enableLog = kDebugMode,
     this.popGesture,
     this.transitionDuration,
     this.defaultGlobalState,
-    this.unknownRoute,
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.actions,
-    this.navigatorKey,
-    this.cupertinoTheme,
-    this.initialPlatform,
+    this.darkTheme,
+    this.themeMode,
+    this.restorationScopeId,
+    this.scrollBehavior = const MacosScrollBehavior(),
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
         backButtonDispatcher = null,
+        assert(Platform.isMacOS),
         super(key: key);
 
-  MitXPlatFormApp.router({
+  MitXMacosApp.router({
     Key? key,
+    this.theme,
     this.routeInformationProvider,
-    this.scaffoldMessengerKey,
     RouteInformationParser<Object>? routeInformationParser,
     RouterDelegate<Object>? routerDelegate,
     this.backButtonDispatcher,
     this.builder,
     this.title = '',
     this.onGenerateTitle,
+    // this.useInheritedMediaQuery = false,
     this.color,
-    this.theme,
-    this.darkTheme,
-    this.useInheritedMediaQuery = false,
     this.highContrastTheme,
     this.highContrastDarkTheme,
-    this.themeMode = ThemeMode.system,
     this.locale,
     this.localizationsDelegates,
     this.localeListResolutionCallback,
     this.localeResolutionCallback,
     this.supportedLocales = const <Locale>[Locale('en', 'US')],
-    this.debugShowMaterialGrid = false,
     this.showPerformanceOverlay = false,
     this.checkerboardRasterCacheImages = false,
     this.checkerboardOffscreenLayers = false,
     this.showSemanticsDebugger = false,
     this.debugShowCheckedModeBanner = true,
     this.shortcuts,
-    this.scrollBehavior,
     this.actions,
     this.customTransition,
-    this.translationsKey,
     this.translations,
     this.textDirection,
     this.fallbackLocale,
@@ -163,57 +152,59 @@ class MitXPlatFormApp extends StatefulWidget {
     this.popGesture,
     this.transitionDuration,
     this.defaultGlobalState,
-    this.mitXPages,
-    this.navigatorObservers,
+    this.getPages,
     this.unknownRoute,
-    this.navigatorKey,
-    this.cupertinoTheme,
-    this.initialPlatform,
+    this.darkTheme,
+    this.themeMode,
+    this.restorationScopeId,
+    this.scrollBehavior = const MacosScrollBehavior(),
   })  : routerDelegate = routerDelegate ??= MitX.createDelegate(
           notFoundRoute: unknownRoute,
         ),
         routeInformationParser =
             routeInformationParser ??= MitX.createInformationParser(
-          initialRoute: mitXPages?.first.name ?? '/',
+          initialRoute: getPages?.first.name ?? '/',
         ),
-        //navigatorObservers = null,
-        //       navigatorKey = null,
+        navigatorObservers = null,
+        navigatorKey = null,
         onGenerateRoute = null,
         home = null,
         onGenerateInitialRoutes = null,
         onUnknownRoute = null,
         routes = null,
         initialRoute = null,
+        assert(Platform.isMacOS),
         super(key: key) {
     MitX.routerDelegate = routerDelegate;
     MitX.routeInformationParser = routeInformationParser;
+
+    StaticData.macosTheme = theme;
+    StaticData.darkMacosTheme = darkTheme;
   }
 
   @override
-  State<MitXPlatFormApp> createState() => _MitXPlatFormAppState();
+  State<MitXMacosApp> createState() => _MitXMacosAppState();
 }
 
-class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
+class _MitXMacosAppState extends State<MitXMacosApp> {
   @override
   void initState() {
     StaticData.navigateKey = widget.navigatorKey ?? GlobalKey<NavigatorState>();
-    if (widget.mitXPages != null) {
-      MitX.addPages(widget.mitXPages!);
-    }
-
-    if (widget.translations != null) {
-      MitX.addTranslations(widget.translations!.keys);
-    } else if (widget.translationsKey != null) {
-      MitX.addTranslations(widget.translationsKey!);
-    }
-
     if (widget.locale != null) MitX.locale = widget.locale;
 
     if (widget.fallbackLocale != null) {
       MitX.fallbackLocale = widget.fallbackLocale;
     }
 
+    if (widget.translations != null) {
+      MitX.addTranslations(widget.translations!.keys);
+    }
+
     MitX.customTransition = widget.customTransition;
+
+    if (widget.getPages != null) {
+      MitX.addPages(widget.getPages!);
+    }
 
     MitX.config(
       enableLog: widget.enableLog,
@@ -223,92 +214,56 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
       defaultDurationTransition:
           widget.transitionDuration ?? MitX.defaultTransitionDuration,
     );
-    MitX.locale ??= widget.supportedLocales.elementAt(0);
-
-    StaticData.theme = widget.theme;
-    StaticData.darkTheme = widget.darkTheme;
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) => widget.routerDelegate != null
-      ? PlatformProvider(
-          initialPlatform: widget.initialPlatform,
-          settings: PlatformSettingsData(
-            iosUsesMaterialWidgets: true,
-            iosUseZeroPaddingForAppbarPlatformIcon: true,
-          ),
-          builder: (context) => PlatformApp.router(
-            routerDelegate: widget.routerDelegate!,
-            routeInformationParser: widget.routeInformationParser!,
-            backButtonDispatcher: widget.backButtonDispatcher,
-            routeInformationProvider: widget.routeInformationProvider,
-            key: MitX.key,
-            builder: defaultBuilder,
-            title: widget.title,
-            onGenerateTitle: widget.onGenerateTitle,
-            color: widget.color,
-            localizationsDelegates: widget.localizationsDelegates,
-            localeListResolutionCallback: widget.localeListResolutionCallback,
-            localeResolutionCallback: widget.localeResolutionCallback,
-            supportedLocales: widget.supportedLocales,
-            material: (context, platform) => MaterialAppRouterData(
-              theme: StaticData.theme ?? widget.theme ?? ThemeData.fallback(),
-              darkTheme: StaticData.darkTheme ??
-                  widget.darkTheme ??
-                  widget.theme ??
-                  ThemeData.fallback(),
-              themeMode: widget.themeMode,
-              locale: MitX.locale ?? widget.locale,
-              scaffoldMessengerKey: widget.scaffoldMessengerKey ??
-                  StaticData.scaffoldMessengerKey,
-              debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-              debugShowMaterialGrid: widget.debugShowMaterialGrid,
-            ),
-            cupertino: (context, platform) => CupertinoAppRouterData(
-              useInheritedMediaQuery: widget.useInheritedMediaQuery,
-              locale: MitX.locale ?? widget.locale,
-              debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-              routerDelegate: widget.routerDelegate!,
-              routeInformationParser: widget.routeInformationParser!,
-              backButtonDispatcher: widget.backButtonDispatcher,
-              routeInformationProvider: widget.routeInformationProvider,
-              theme: widget.cupertinoTheme,
-              builder: defaultBuilder,
-              title: widget.title,
-              onGenerateTitle: widget.onGenerateTitle,
-              color: widget.color,
-              localizationsDelegates: widget.localizationsDelegates,
-              localeListResolutionCallback: widget.localeListResolutionCallback,
-              localeResolutionCallback: widget.localeResolutionCallback,
-              supportedLocales: widget.supportedLocales,
-              showPerformanceOverlay: widget.showPerformanceOverlay,
-              checkerboardRasterCacheImages:
-                  widget.checkerboardRasterCacheImages,
-              checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-              showSemanticsDebugger: widget.showSemanticsDebugger,
-              shortcuts: widget.shortcuts,
-            ),
-            showPerformanceOverlay: widget.showPerformanceOverlay,
-            checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
-            checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-            showSemanticsDebugger: widget.showSemanticsDebugger,
-            debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-            shortcuts: widget.shortcuts,
-            scrollBehavior: widget.scrollBehavior,
-            useInheritedMediaQuery: widget.useInheritedMediaQuery,
-          ),
+      ? MacosApp.router(
+          routerDelegate: widget.routerDelegate!,
+          routeInformationParser: widget.routeInformationParser!,
+          backButtonDispatcher: widget.backButtonDispatcher,
+          routeInformationProvider: widget.routeInformationProvider,
+          key: MitX.key,
+          theme: widget.theme ?? MacosThemeData.fallback(),
+          darkTheme:
+              widget.darkTheme ?? widget.theme ?? MacosThemeData.fallback(),
+          themeMode: widget.themeMode,
+          restorationScopeId: widget.restorationScopeId,
+          scrollBehavior: widget.scrollBehavior,
+          builder: defaultBuilder,
+          title: widget.title,
+          onGenerateTitle: widget.onGenerateTitle,
+          color: widget.color,
+          locale: MitX.locale ?? widget.locale,
+          localizationsDelegates: widget.localizationsDelegates,
+          localeListResolutionCallback: widget.localeListResolutionCallback,
+          localeResolutionCallback: widget.localeResolutionCallback,
+          supportedLocales: widget.supportedLocales,
+          showPerformanceOverlay: widget.showPerformanceOverlay,
+          checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
+          showSemanticsDebugger: widget.showSemanticsDebugger,
+          debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
+          shortcuts: widget.shortcuts,
+          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          actions: widget.actions,
         )
-      : PlatformApp(
-          navigatorKey: MitX.key,
+      : MacosApp(
+          theme: widget.theme ?? MacosThemeData.fallback(),
+          darkTheme:
+              widget.darkTheme ?? widget.theme ?? MacosThemeData.fallback(),
+          themeMode: widget.themeMode,
+          restorationScopeId: widget.restorationScopeId,
+          scrollBehavior: widget.scrollBehavior, navigatorKey: (MitX.key),
+          actions: widget.actions,
           home: widget.home,
           routes: widget.routes ?? const <String, WidgetBuilder>{},
           initialRoute: widget.initialRoute,
           onGenerateRoute:
-              (widget.mitXPages != null ? generator : widget.onGenerateRoute),
+              (widget.getPages != null ? generator : widget.onGenerateRoute),
           onGenerateInitialRoutes:
-              (widget.mitXPages == null || widget.home != null)
+              (widget.getPages == null || widget.home != null)
                   ? widget.onGenerateInitialRoutes
                   : initialRoutesGenerate,
           onUnknownRoute: widget.onUnknownRoute,
@@ -321,40 +276,9 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
                 ]
             ..addAll(widget.navigatorObservers!)),
           builder: defaultBuilder,
-          cupertino: (context, platform) => CupertinoAppData(
-            useInheritedMediaQuery: widget.useInheritedMediaQuery,
-            locale: MitX.locale ?? widget.locale,
-            debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-            theme: widget.cupertinoTheme,
-            builder: defaultBuilder,
-            title: widget.title,
-            onGenerateTitle: widget.onGenerateTitle,
-            color: widget.color,
-            localizationsDelegates: widget.localizationsDelegates,
-            localeListResolutionCallback: widget.localeListResolutionCallback,
-            localeResolutionCallback: widget.localeResolutionCallback,
-            supportedLocales: widget.supportedLocales,
-            showPerformanceOverlay: widget.showPerformanceOverlay,
-            checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
-            checkerboardOffscreenLayers: widget.checkerboardOffscreenLayers,
-            showSemanticsDebugger: widget.showSemanticsDebugger,
-            shortcuts: widget.shortcuts,
-          ),
           title: widget.title,
           onGenerateTitle: widget.onGenerateTitle,
           color: widget.color,
-          material: (context, platform) => MaterialAppData(
-              theme: StaticData.theme ?? widget.theme ?? ThemeData.fallback(),
-              darkTheme: StaticData.darkTheme ??
-                  widget.darkTheme ??
-                  widget.theme ??
-                  ThemeData.fallback(),
-              themeMode: widget.themeMode,
-              locale: MitX.locale ?? widget.locale,
-              scaffoldMessengerKey: widget.scaffoldMessengerKey ??
-                  StaticData.scaffoldMessengerKey,
-              debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
-              debugShowMaterialGrid: widget.debugShowMaterialGrid),
           locale: MitX.locale ?? widget.locale,
           localizationsDelegates: widget.localizationsDelegates,
           localeListResolutionCallback: widget.localeListResolutionCallback,
@@ -366,8 +290,7 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
           showSemanticsDebugger: widget.showSemanticsDebugger,
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
-          scrollBehavior: widget.scrollBehavior,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          //   actions: actions,
         );
 
   Widget defaultBuilder(BuildContext context, Widget? child) {

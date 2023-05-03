@@ -56,6 +56,9 @@ class MitXMaterialApp extends StatefulWidget {
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
   final bool useInheritedMediaQuery;
+  final String? restorationScopeId;
+  final Curve themeAnimationCurve;
+  final Duration themeAnimationDuration;
   const MitXMaterialApp({
     Key? key,
     //   this.navigatorKey,
@@ -108,6 +111,9 @@ class MitXMaterialApp extends StatefulWidget {
     this.highContrastDarkTheme,
     this.actions,
     this.navigatorKey,
+    this.restorationScopeId,
+    this.themeAnimationCurve = Curves.linear,
+    this.themeAnimationDuration = kThemeAnimationDuration,
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
@@ -161,6 +167,9 @@ class MitXMaterialApp extends StatefulWidget {
     this.navigatorObservers,
     this.unknownRoute,
     this.navigatorKey,
+    this.themeAnimationDuration = kThemeAnimationDuration,
+    this.themeAnimationCurve = Curves.linear,
+    this.restorationScopeId,
   })  : routerDelegate = routerDelegate ??= MitX.createDelegate(
           notFoundRoute: unknownRoute,
         ),
@@ -217,6 +226,8 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
     );
     MitX.locale ??= widget.supportedLocales.elementAt(0);
 
+    StaticData.theme = widget.theme;
+    StaticData.darkTheme = widget.darkTheme;
     super.initState();
   }
 
@@ -254,6 +265,12 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
           useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          actions: widget.actions,
+          highContrastDarkTheme: widget.highContrastDarkTheme,
+          highContrastTheme: widget.highContrastTheme,
+          restorationScopeId: widget.restorationScopeId,
+          themeAnimationCurve: widget.themeAnimationCurve,
+          themeAnimationDuration: widget.themeAnimationDuration,
         )
       : MaterialApp(
           navigatorKey: MitX.key,
@@ -300,8 +317,11 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
+          actions: widget.actions,
           useInheritedMediaQuery: widget.useInheritedMediaQuery,
-          //   actions: actions,
+          restorationScopeId: widget.restorationScopeId,
+          themeAnimationCurve: widget.themeAnimationCurve,
+          themeAnimationDuration: widget.themeAnimationDuration,
         );
 
   Widget defaultBuilder(BuildContext context, Widget? child) {
