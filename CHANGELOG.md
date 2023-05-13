@@ -1,3 +1,6 @@
+## 2.0.1-dart3
+- support dart 3 , flutter 3.10.0 and above and not support fluent ui and macos ui
+
 ## 2.0.0
 
 - Add Fluent UI And Macos ui library
