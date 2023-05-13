@@ -55,7 +55,8 @@ class MitXMaterialApp extends StatefulWidget {
   final RouteInformationParser<Object>? routeInformationParser;
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
-  final bool useInheritedMediaQuery;
+  // final bool useInheritedMediaQuery;
+
   final String? restorationScopeId;
   final Curve themeAnimationCurve;
   final Duration themeAnimationDuration;
@@ -70,7 +71,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    this.useInheritedMediaQuery = false,
+    // this.useInheritedMediaQuery = false,
     List<NavigatorObserver> this.navigatorObservers =
         const <NavigatorObserver>[],
     this.builder,
@@ -133,7 +134,7 @@ class MitXMaterialApp extends StatefulWidget {
     this.color,
     this.theme,
     this.darkTheme,
-    this.useInheritedMediaQuery = false,
+    // this.useInheritedMediaQuery = false,
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.themeMode = ThemeMode.system,
@@ -264,7 +265,7 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
           actions: widget.actions,
           highContrastDarkTheme: widget.highContrastDarkTheme,
           highContrastTheme: widget.highContrastTheme,
@@ -318,7 +319,7 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
           actions: widget.actions,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
+          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
           restorationScopeId: widget.restorationScopeId,
           themeAnimationCurve: widget.themeAnimationCurve,
           themeAnimationDuration: widget.themeAnimationDuration,
