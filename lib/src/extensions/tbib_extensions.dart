@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-// import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
 // import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -1053,10 +1053,10 @@ you can only use widgets and widget functions here''';
     await forceAppUpdate();
   }
 
-  // void changeFluentTheme(fluent.FluentThemeData theme) async {
-  //   StaticData.setFluentTheme(theme);
-  //   await forceAppUpdate();
-  // }
+  void changeFluentTheme(fluent.FluentThemeData theme) async {
+    StaticData.setFluentTheme(theme);
+    await forceAppUpdate();
+  }
 
   // void changeMacTheme(macos.MacosThemeData theme) async {
   //   StaticData.setMacosTheme(theme);
@@ -1323,13 +1323,6 @@ extension NavTwoExt on MitXInterface {
   /// Casts the stored router delegate to a desired type
   TDelegate? delegate<TDelegate extends RouterDelegate<TPage>, TPage>() =>
       routerDelegate as TDelegate?;
-
-  // // ignore: use_setters_to_change_properties
-  // void setDefaultDelegate(RouterDelegate? delegate) {
-  //   _routerDelegate = delegate;
-  // }
-
-  // GetDelegate? getDelegate() => delegate<GetDelegate, GetNavConfig>();
 
   GetInformationParser createInformationParser({String initialRoute = '/'}) {
     if (routeInformationParser == null) {

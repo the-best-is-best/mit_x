@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:mit_x/mit_x.dart';
-// import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
 
 extension TBIBNativeUIExtension on MitXInterface {
-  // void setFluentUITo(
-  //     {bool macos = false,
-  //     bool linux = false,
-  //     bool windows = true,
-  //     bool android = false}) {
-  //   StaticData.macosFluent = macos;
-  //   StaticData.linuxFluent = linux;
-  //   StaticData.windowsFluent = windows;
-  //   StaticData.androidFluent = android;
-  // }
+  void setFluentUITo(
+      {bool macos = false,
+      bool linux = false,
+      bool windows = true,
+      bool android = false}) {
+    StaticData.macosFluent = macos;
+    StaticData.linuxFluent = linux;
+    StaticData.windowsFluent = windows;
+    StaticData.androidFluent = android;
+  }
 
-  // bool isFluentUITo() {
-  //   return StaticData.macosFluent ||
-  //       StaticData.linuxFluent ||
-  //       StaticData.windowsFluent ||
-  //       StaticData.androidFluent;
-  // }
+  bool isFluentUITo() {
+    return StaticData.macosFluent ||
+        StaticData.linuxFluent ||
+        StaticData.windowsFluent ||
+        StaticData.androidFluent;
+  }
 
   void showNativeSnackBar(
       {TextStyle? titleAlertStyle,
@@ -74,13 +74,13 @@ extension TBIBNativeUIExtension on MitXInterface {
           ]),
       duration: duration ?? const Duration(seconds: 3),
     );
-    // if (StaticData.windowsFluent ||
-    //     StaticData.macosFluent ||
-    //     StaticData.linuxFluent) {
-    //   fluent.showSnackbar(MitX.context!, snackBar);
-    // } else {
-    ScaffoldMessenger.of(MitX.context!).showSnackBar(snackBar);
-    //}
+    if (StaticData.windowsFluent ||
+        StaticData.macosFluent ||
+        StaticData.linuxFluent) {
+      fluent.showSnackbar(MitX.context!, snackBar);
+    } else {
+      ScaffoldMessenger.of(MitX.context!).showSnackBar(snackBar);
+    }
   }
 
   // Future<T?>? nativeBottomSheet<T>(Widget bottomsheet,
