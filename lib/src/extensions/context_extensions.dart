@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../static/static_data.dart';
 import '../platform/platform.dart';
+import '../static/static_data.dart';
 
 extension ContextExtensionss on BuildContext {
   /// The same of [MediaQuery.of(context).size]
@@ -93,7 +93,7 @@ extension ContextExtensionss on BuildContext {
   double get devicePixelRatio => MediaQuery.of(this).devicePixelRatio;
 
   /// similar to [MediaQuery.of(this).textScaleFactor]
-  double get textScaleFactor => MediaQuery.of(this).textScaleFactor;
+  double get textScaleFactor => MediaQuery.of(this).textScaler.scale(1);
 
   /// get the shortestSide from screen
   double get mediaQueryShortestSide => mediaQuerySize.shortestSide;

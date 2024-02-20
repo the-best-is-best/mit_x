@@ -55,10 +55,9 @@ class MitXFluentUIApp extends StatefulWidget {
   final RouteInformationParser<Object>? routeInformationParser;
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
-  final bool useInheritedMediaQuery;
   final String? restorationScopeId;
   const MitXFluentUIApp({
-    Key? key,
+    super.key,
     //   this.navigatorKey,
     this.home,
     Map<String, Widget Function(BuildContext)> this.routes =
@@ -67,7 +66,6 @@ class MitXFluentUIApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    this.useInheritedMediaQuery = false,
     List<NavigatorObserver> this.navigatorObservers =
         const <NavigatorObserver>[],
     this.builder,
@@ -112,11 +110,10 @@ class MitXFluentUIApp extends StatefulWidget {
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
-        backButtonDispatcher = null,
-        super(key: key);
+        backButtonDispatcher = null;
 
   MitXFluentUIApp.router({
-    Key? key,
+    super.key,
     this.routeInformationProvider,
     RouteInformationParser<Object>? routeInformationParser,
     RouterDelegate<Object>? routerDelegate,
@@ -127,7 +124,6 @@ class MitXFluentUIApp extends StatefulWidget {
     this.color,
     this.theme,
     this.darkTheme,
-    this.useInheritedMediaQuery = false,
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.themeMode = ThemeMode.system,
@@ -176,8 +172,7 @@ class MitXFluentUIApp extends StatefulWidget {
         onGenerateInitialRoutes = null,
         onUnknownRoute = null,
         routes = null,
-        initialRoute = null,
-        super(key: key) {
+        initialRoute = null {
     MitX.routerDelegate = routerDelegate;
     MitX.routeInformationParser = routeInformationParser;
 
@@ -253,7 +248,6 @@ class _MitXFluentUIAppState extends State<MitXFluentUIApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
-          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
           actions: widget.actions,
         )
       : FluentApp(
@@ -298,7 +292,6 @@ class _MitXFluentUIAppState extends State<MitXFluentUIApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
-          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
 
           //   actions: actions,
         );

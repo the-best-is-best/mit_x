@@ -57,11 +57,10 @@ class MitXPlatFormApp extends StatefulWidget {
   final RouteInformationParser<Object>? routeInformationParser;
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
-  final bool useInheritedMediaQuery;
   final CupertinoThemeData? cupertinoTheme;
   final TargetPlatform? initialPlatform;
   const MitXPlatFormApp({
-    Key? key,
+    super.key,
     //   this.navigatorKey,
     this.scaffoldMessengerKey,
     this.home,
@@ -71,7 +70,6 @@ class MitXPlatFormApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    this.useInheritedMediaQuery = false,
     List<NavigatorObserver> this.navigatorObservers =
         const <NavigatorObserver>[],
     this.builder,
@@ -117,11 +115,10 @@ class MitXPlatFormApp extends StatefulWidget {
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
-        backButtonDispatcher = null,
-        super(key: key);
+        backButtonDispatcher = null;
 
   MitXPlatFormApp.router({
-    Key? key,
+    super.key,
     this.routeInformationProvider,
     this.scaffoldMessengerKey,
     RouteInformationParser<Object>? routeInformationParser,
@@ -133,7 +130,6 @@ class MitXPlatFormApp extends StatefulWidget {
     this.color,
     this.theme,
     this.darkTheme,
-    this.useInheritedMediaQuery = false,
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.themeMode = ThemeMode.system,
@@ -183,8 +179,7 @@ class MitXPlatFormApp extends StatefulWidget {
         onGenerateInitialRoutes = null,
         onUnknownRoute = null,
         routes = null,
-        initialRoute = null,
-        super(key: key) {
+        initialRoute = null {
     MitX.routerDelegate = routerDelegate;
     MitX.routeInformationParser = routeInformationParser;
   }
@@ -267,7 +262,6 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
               debugShowMaterialGrid: widget.debugShowMaterialGrid,
             ),
             cupertino: (context, platform) => CupertinoAppRouterData(
-              useInheritedMediaQuery: widget.useInheritedMediaQuery,
               locale: MitX.locale ?? widget.locale,
               debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
               routerDelegate: widget.routerDelegate!,
@@ -297,7 +291,6 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
             debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
             shortcuts: widget.shortcuts,
             scrollBehavior: widget.scrollBehavior,
-            useInheritedMediaQuery: widget.useInheritedMediaQuery,
           ),
         )
       : PlatformApp(
@@ -322,7 +315,6 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
             ..addAll(widget.navigatorObservers!)),
           builder: defaultBuilder,
           cupertino: (context, platform) => CupertinoAppData(
-            useInheritedMediaQuery: widget.useInheritedMediaQuery,
             locale: MitX.locale ?? widget.locale,
             debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
             theme: widget.cupertinoTheme,
@@ -367,7 +359,6 @@ class _MitXPlatFormAppState extends State<MitXPlatFormApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
-          useInheritedMediaQuery: widget.useInheritedMediaQuery,
         );
 
   Widget defaultBuilder(BuildContext context, Widget? child) {

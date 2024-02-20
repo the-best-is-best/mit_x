@@ -16,10 +16,10 @@ class MitXBottomSheetRoute<T> extends PopupRoute<T> {
     this.isDismissible = true,
     this.enableDrag = true,
     required this.isScrollControlled,
-    RouteSettings? settings,
+    super.settings,
     this.enterBottomSheetDuration = const Duration(milliseconds: 250),
     this.exitBottomSheetDuration = const Duration(milliseconds: 200),
-  }) : super(settings: settings) {
+  }) {
     RouterReportManager.reportCurrentRoute(this);
   }
   final bool? isPersistent;
@@ -103,7 +103,7 @@ class MitXBottomSheetRoute<T> extends PopupRoute<T> {
 
 class _MitXModalBottomSheet<T> extends StatefulWidget {
   const _MitXModalBottomSheet({
-    Key? key,
+    super.key,
     this.route,
     this.backgroundColor,
     this.elevation,
@@ -112,7 +112,7 @@ class _MitXModalBottomSheet<T> extends StatefulWidget {
     this.isScrollControlled = false,
     this.enableDrag = true,
     this.isPersistent = false,
-  }) : super(key: key);
+  });
   final bool isPersistent;
   final MitXBottomSheetRoute<T>? route;
   final bool isScrollControlled;
@@ -203,7 +203,7 @@ class _MitXModalBottomSheetState<T> extends State<_MitXModalBottomSheet<T>> {
 
 class _MitXPerModalBottomSheet<T> extends StatefulWidget {
   const _MitXPerModalBottomSheet({
-    Key? key,
+    super.key,
     this.route,
     this.isPersistent,
     this.backgroundColor,
@@ -212,7 +212,7 @@ class _MitXPerModalBottomSheet<T> extends StatefulWidget {
     this.clipBehavior,
     this.isScrollControlled = false,
     this.enableDrag = true,
-  }) : super(key: key);
+  });
   final bool? isPersistent;
   final MitXBottomSheetRoute<T>? route;
   final bool isScrollControlled;

@@ -55,13 +55,12 @@ class MitXMaterialApp extends StatefulWidget {
   final RouteInformationParser<Object>? routeInformationParser;
   final RouterDelegate<Object>? routerDelegate;
   final BackButtonDispatcher? backButtonDispatcher;
-  // final bool useInheritedMediaQuery;
 
   final String? restorationScopeId;
   final Curve themeAnimationCurve;
   final Duration themeAnimationDuration;
   const MitXMaterialApp({
-    Key? key,
+    super.key,
     //   this.navigatorKey,
     this.scaffoldMessengerKey,
     this.home,
@@ -71,7 +70,6 @@ class MitXMaterialApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    // this.useInheritedMediaQuery = false,
     List<NavigatorObserver> this.navigatorObservers =
         const <NavigatorObserver>[],
     this.builder,
@@ -118,11 +116,10 @@ class MitXMaterialApp extends StatefulWidget {
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
-        backButtonDispatcher = null,
-        super(key: key);
+        backButtonDispatcher = null;
 
   MitXMaterialApp.router({
-    Key? key,
+    super.key,
     this.routeInformationProvider,
     this.scaffoldMessengerKey,
     RouteInformationParser<Object>? routeInformationParser,
@@ -134,7 +131,6 @@ class MitXMaterialApp extends StatefulWidget {
     this.color,
     this.theme,
     this.darkTheme,
-    // this.useInheritedMediaQuery = false,
     this.highContrastTheme,
     this.highContrastDarkTheme,
     this.themeMode = ThemeMode.system,
@@ -185,8 +181,7 @@ class MitXMaterialApp extends StatefulWidget {
         onGenerateInitialRoutes = null,
         onUnknownRoute = null,
         routes = null,
-        initialRoute = null,
-        super(key: key) {
+        initialRoute = null {
     MitX.routerDelegate = routerDelegate;
     MitX.routeInformationParser = routeInformationParser;
   }
@@ -265,7 +260,6 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           debugShowCheckedModeBanner: widget.debugShowCheckedModeBanner,
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
-          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
           actions: widget.actions,
           highContrastDarkTheme: widget.highContrastDarkTheme,
           highContrastTheme: widget.highContrastTheme,
@@ -319,7 +313,6 @@ class _MitXMaterialAppState extends State<MitXMaterialApp> {
           shortcuts: widget.shortcuts,
           scrollBehavior: widget.scrollBehavior,
           actions: widget.actions,
-          // useInheritedMediaQuery: widget.useInheritedMediaQuery,
           restorationScopeId: widget.restorationScopeId,
           themeAnimationCurve: widget.themeAnimationCurve,
           themeAnimationDuration: widget.themeAnimationDuration,

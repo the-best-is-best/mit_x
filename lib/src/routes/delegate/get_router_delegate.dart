@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mit_x/src/extensions/tbib_extensions.dart';
@@ -69,7 +70,7 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
     var iterator = currentConfiguration;
     while (_canPop(popMode) &&
         iterator != null &&
-        iterator.location != fullRoute) {
+        iterator.uri.path != fullRoute) {
       await _pop(popMode);
       // replace iterator
       iterator = currentConfiguration;
@@ -237,7 +238,7 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
       await pushHistory(
         GetNavConfig(
           currentTreeBranch: decoder.treeBranch,
-          location: page,
+          uri: Uri.parse(page),
           state: null, //TODO: persist state?
         ),
       );
@@ -294,8 +295,8 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
       if (prevHistoryEntry != null) {
         //if so, pop the entire history entry
         final newLocation = remaining.last.name;
-        final prevLocation = prevHistoryEntry.location;
-        if (newLocation == prevLocation) {
+        final prevLocation = prevHistoryEntry.uri;
+        if (newLocation == prevLocation.path) {
           //pop the entire history entry
           return await _popHistory();
         }
@@ -306,7 +307,7 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
       await _pushHistory(
         GetNavConfig(
           currentTreeBranch: remaining.toList(),
-          location: remaining.last.name,
+          uri: Uri.parse(remaining.last.name),
           state: null, //TOOD: persist state??
         ),
       );
@@ -364,11 +365,11 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
   Future<void> _pushHistory(GetNavConfig config) async {
     if (config.currentPage!.preventDuplicates) {
       final originalEntryIndex =
-          history.indexWhere((element) => element.location == config.location);
+          history.indexWhere((element) => element.uri == config.uri);
       if (originalEntryIndex >= 0) {
         switch (preventDuplicateHandlingMode) {
           case PreventDuplicateHandlingMode.PopUntilOriginalRoute:
-            await backUntil(config.location!, popMode: PopMode.Page);
+            await backUntil(config.uri.path, popMode: PopMode.Page);
             break;
           case PreventDuplicateHandlingMode.ReorderRoutes:
             await _unsafeHistoryRemoveAt(originalEntryIndex);
@@ -413,15 +414,14 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
 
 class GetNavigator extends Navigator {
   GetNavigator({
-    GlobalKey<NavigatorState>? key,
+    GlobalKey<NavigatorState>? super.key,
     bool Function(Route<dynamic>, dynamic)? onPopPage,
-    required List<Page> pages,
+    required super.pages,
     List<NavigatorObserver>? observers,
-    bool reportsRouteUpdateToEngine = false,
+    super.reportsRouteUpdateToEngine,
     TransitionDelegate? transitionDelegate,
   }) : super(
           //keys should be optional
-          key: key,
           onPopPage: onPopPage ??
               (route, result) {
                 final didPop = route.didPop(result);
@@ -430,8 +430,6 @@ class GetNavigator extends Navigator {
                 }
                 return true;
               },
-          reportsRouteUpdateToEngine: reportsRouteUpdateToEngine,
-          pages: pages,
           observers: [
             // GetObserver(),
             if (observers != null) ...observers,

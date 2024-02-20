@@ -1,23 +1,22 @@
 name: mit_x
 description: Open screens/snackbars/dialogs/drawer without context /open and
   close drawer or end drawer/check form is valid or save it, with MitX.
-version: 2.0.2
+version: 2.1.0
 homepage: https://github.com/the-best-is-best/mit_x
 
 environment:
- sdk: '>=3.0.0 <4.0.0'
- flutter: ">=3.0.0"
-
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
-  fluent_ui: ^4.6.0
+  fluent_ui: 4.8.6
   flutter:
     sdk: flutter
-  flutter_platform_widgets: ^3.3.2
- # macos_ui: ^1.12.2
+  flutter_platform_widgets: ^6.1.0
+  macos_ui: ^2.0.5
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
 

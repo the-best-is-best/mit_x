@@ -55,7 +55,7 @@ class MitXCupertinoApp extends StatefulWidget {
   final String? restorationScopeId;
   final ScrollBehavior? scrollBehavior;
   const MitXCupertinoApp({
-    Key? key,
+    super.key,
     this.theme,
     this.navigatorKey,
     this.home,
@@ -103,11 +103,10 @@ class MitXCupertinoApp extends StatefulWidget {
   })  : routeInformationProvider = null,
         routeInformationParser = null,
         routerDelegate = null,
-        backButtonDispatcher = null,
-        super(key: key);
+        backButtonDispatcher = null;
 
   MitXCupertinoApp.router({
-    Key? key,
+    super.key,
     this.theme,
     this.routeInformationProvider,
     RouteInformationParser<Object>? routeInformationParser,
@@ -160,8 +159,7 @@ class MitXCupertinoApp extends StatefulWidget {
         onGenerateInitialRoutes = null,
         onUnknownRoute = null,
         routes = null,
-        initialRoute = null,
-        super(key: key) {
+        initialRoute = null {
     MitX.routerDelegate = routerDelegate;
     MitX.routeInformationParser = routeInformationParser;
   }

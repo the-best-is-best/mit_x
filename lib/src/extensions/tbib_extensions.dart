@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
-// import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:macos_ui/macos_ui.dart' as macos;
 import 'package:mit_x/mit_x.dart';
 import 'package:mit_x/src/routes/custom_transition.dart';
 import 'package:mit_x/src/routes/default_route.dart';
@@ -170,7 +170,7 @@ extension ExtensionDialog on MitXInterface {
     List<Widget>? actions,
 
     // onWillPop Scope
-    WillPopCallback? onWillPop,
+    PopInvokedCallback? onWillPop,
 
     // the navigator used to push the dialog
     GlobalKey<NavigatorState>? navigatorKey,
@@ -264,8 +264,8 @@ extension ExtensionDialog on MitXInterface {
 
     return dialog<T>(
       onWillPop != null
-          ? WillPopScope(
-              onWillPop: onWillPop,
+          ? PopScope(
+              onPopInvoked: onWillPop,
               child: baseAlertDialog,
             )
           : baseAlertDialog,
@@ -828,8 +828,6 @@ you can only use widgets and widget functions here''';
     }
 
     if (closeOverlays && isOverlaysOpen) {
-      //TODO: This code brings compatibility of the new snackbar with GetX 4,
-      // remove this code in version 5
       if (isSnackbarOpen) {
         closeAllSnackbars();
       }
@@ -1058,10 +1056,10 @@ you can only use widgets and widget functions here''';
     await forceAppUpdate();
   }
 
-  // void changeMacTheme(macos.MacosThemeData theme) async {
-  //   StaticData.setMacosTheme(theme);
-  //   await forceAppUpdate();
-  // }
+  void changeMacTheme(macos.MacosThemeData theme) async {
+    StaticData.setMacosTheme(theme);
+    await forceAppUpdate();
+  }
 
   void changeThemeMode(ThemeMode themeMode) async {
     StaticData.setThemeMode(themeMode);

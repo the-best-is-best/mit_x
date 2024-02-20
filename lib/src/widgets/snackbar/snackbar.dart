@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mit_x/mit_x.dart';
@@ -161,7 +162,7 @@ class MitXSnackBar extends StatefulWidget {
   final Form? userInputForm;
 
   const MitXSnackBar({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.titleText,
@@ -197,7 +198,7 @@ class MitXSnackBar extends StatefulWidget {
     this.overlayColor = Colors.transparent,
     this.userInputForm,
     this.snackbarStatus,
-  }) : super(key: key);
+  });
 
   @override
   State createState() => MitXSnackBarState();

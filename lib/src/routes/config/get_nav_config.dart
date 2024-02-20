@@ -7,12 +7,9 @@ class GetNavConfig extends RouteInformation {
 
   GetNavConfig({
     required this.currentTreeBranch,
-    required String? location,
-    required Object? state,
-  }) : super(
-          location: location,
-          state: state,
-        );
+    required super.uri,
+    required super.state,
+  });
 
   GetNavConfig copyWith({
     List<MitXPage>? currentTreeBranch,
@@ -21,7 +18,7 @@ class GetNavConfig extends RouteInformation {
   }) {
     return GetNavConfig(
       currentTreeBranch: currentTreeBranch ?? this.currentTreeBranch,
-      location: location ?? this.location,
+      uri: location != null ? Uri.parse(location) : uri,
       state: state ?? this.state,
     );
   }
@@ -31,13 +28,12 @@ class GetNavConfig extends RouteInformation {
     if (res.treeBranch.isEmpty) return null;
     return GetNavConfig(
       currentTreeBranch: res.treeBranch,
-      location: route,
+      uri: Uri.parse(route),
       state: null,
     );
   }
 
   @override
-  String toString() =>
-      '''
+  String toString() => '''
 ======GetNavConfig=====\ncurrentTreeBranch: $currentTreeBranch\ncurrentPage: $currentPage\n======GetNavConfig=====''';
 }
