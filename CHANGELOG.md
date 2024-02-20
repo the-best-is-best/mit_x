@@ -1,3 +1,12 @@
+## 2.2.0
+
+- update dep
+- fix errors in analysis
+
+## 2.1.0
+
+- update dep
+
 ## 2.0.2
 - support dart 3 and support fluent ui only
 
